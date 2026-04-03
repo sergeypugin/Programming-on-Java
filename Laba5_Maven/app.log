@@ -1,0 +1,131 @@
+2026-03-17 22:58:02 [main] INFO  managers.CommandManager - Файл 'example.xml' был передан программе
+2026-03-17 22:58:02 [main] INFO  managers.FileManager - Загружено объектов: 2
+2026-03-17 22:58:02 [main] INFO  managers.CommandManager - Программа готова к работе.
+2026-03-17 22:58:02 [main] INFO  managers.CommandManager - Для справки введите 'help'.
+2026-03-17 22:58:17 [main] INFO  Main - ========================================================
+2026-03-17 22:58:17 [main] INFO  Main -           НОВЫЙ СЕАНС РАБОТЫ ПРОГРАММЫ ЗАПУЩЕН
+2026-03-17 22:58:17 [main] INFO  Main - Время запуска: 2026-03-17T22:58:17.658799200
+2026-03-17 22:58:17 [main] INFO  Main - ========================================================
+2026-03-17 22:58:17 [main] INFO  managers.CommandManager - Файл 'example.xml' был передан программе
+2026-03-17 22:58:17 [main] INFO  managers.FileManager - Загружено объектов: 2
+2026-03-17 22:58:17 [main] INFO  managers.CommandManager - Программа готова к работе.
+2026-03-17 22:58:17 [main] INFO  managers.CommandManager - Для справки введите 'help'.
+2026-03-18 16:07:08 [main] INFO  Main - ========================================================
+2026-03-18 16:07:08 [main] INFO  Main -           НОВЫЙ СЕАНС РАБОТЫ ПРОГРАММЫ ЗАПУЩЕН
+2026-03-18 16:07:08 [main] INFO  Main - Время запуска: 2026-03-18T16:07:08.747877300
+2026-03-18 16:07:08 [main] INFO  Main - ========================================================
+2026-03-18 16:07:08 [main] INFO  managers.CommandManager - Файл 'example.xml' был передан программе
+2026-03-18 16:07:08 [main] INFO  managers.FileManager - Загружено объектов: 2
+2026-03-18 16:07:08 [main] INFO  managers.CommandManager - Программа готова к работе.
+2026-03-18 16:07:08 [main] INFO  managers.CommandManager - Для справки введите 'help'.
+2026-03-18 16:07:24 [main] ERROR managers.CommandManager - Неизвестная команда ffjfjfjfjfjfjf, введите help для справки.
+2026-03-18 16:07:29 [main] ERROR managers.CommandManager - Неизвестная команда im, введите help для справки.
+2026-03-18 16:07:32 [main] ERROR managers.CommandManager - Неизвестная команда эесеесе, введите help для справки.
+2026-03-18 16:09:34 [main] INFO  managers.CommandManager - Пользователь ввел команду: exir
+2026-03-18 16:09:34 [main] ERROR managers.Console - Неизвестная команда exir, введите help для справки.
+2026-03-18 16:09:35 [main] INFO  managers.CommandManager - Пользователь ввел команду: exit
+2026-03-18 16:10:27 [main] INFO  Main - ========================================================
+2026-03-18 16:10:27 [main] INFO  Main -           НОВЫЙ СЕАНС РАБОТЫ ПРОГРАММЫ ЗАПУЩЕН
+2026-03-18 16:10:27 [main] INFO  Main - Время запуска: 2026-03-18T16:10:27.918526100
+2026-03-18 16:10:27 [main] INFO  Main - ========================================================
+2026-03-18 16:10:27 [main] INFO  managers.CommandManager - Файл 'example.xml' был передан программе
+2026-03-18 16:10:27 [main] INFO  managers.FileManager - Загружено объектов: 2
+2026-03-18 16:10:27 [main] INFO  managers.CommandManager - Программа готова к работе.
+2026-03-18 16:10:27 [main] INFO  managers.CommandManager - Для справки введите 'help'.
+2026-03-18 16:10:32 [main] ERROR managers.CommandManager - Неизвестная команда jjjjjjjjjjjjjjj, введите help для справки.
+2026-03-18 16:10:35 [main] INFO  commands.Exit - Программа завершена
+2026-03-21 18:03:03 [main] INFO  Main - ========================================================
+2026-03-21 18:03:03 [main] INFO  Main -           НОВЫЙ СЕАНС РАБОТЫ ПРОГРАММЫ ЗАПУЩЕН
+2026-03-21 18:03:03 [main] INFO  Main - Время запуска: 2026-03-21T18:03:03.687644
+2026-03-21 18:03:03 [main] INFO  Main - ========================================================
+2026-03-21 18:03:03 [main] INFO  managers.CommandManager - Файл 'example.xml' был передан программе
+2026-03-21 18:03:03 [main] INFO  managers.FileManager - Загружено объектов: 2
+2026-03-21 18:03:03 [main] INFO  managers.CommandManager - Программа готова к работе.
+2026-03-21 18:03:03 [main] INFO  managers.CommandManager - Для справки введите 'help'.
+2026-03-21 18:03:06 [main] ERROR managers.CommandManager - Неизвестная команда ааыв, введите help для справки.
+2026-03-21 21:48:29 [main] INFO  Main - ========================================================
+2026-03-21 21:48:29 [main] INFO  Main -           НОВЫЙ СЕАНС РАБОТЫ ПРОГРАММЫ ЗАПУЩЕН
+2026-03-21 21:48:29 [main] INFO  Main - Время запуска: 2026-03-21T21:48:29.875959500
+2026-03-21 21:48:29 [main] INFO  Main - ========================================================
+2026-03-21 21:48:29 [main] INFO  managers.CommandManager - Файл 'example.xml' был передан программе
+2026-03-21 21:48:29 [main] INFO  managers.FileManager - Загружено объектов: 2
+2026-03-21 21:48:29 [main] INFO  managers.CommandManager - Программа готова к работе.
+2026-03-21 21:48:29 [main] INFO  managers.CommandManager - Для справки введите 'help'.
+2026-03-21 21:48:31 [main] DEBUG managers.CommandManager - Введена команда: <кппв>
+2026-03-21 21:48:31 [main] ERROR managers.CommandManager - Неизвестная команда кппв, введите help для справки.
+2026-03-21 21:48:31 [main] DEBUG managers.CommandManager - Команда завершена.
+2026-03-21 21:48:31 [main] DEBUG managers.CommandManager - Введена команда: <ппва>
+2026-03-21 21:48:31 [main] ERROR managers.CommandManager - Неизвестная команда ппва, введите help для справки.
+2026-03-21 21:48:31 [main] DEBUG managers.CommandManager - Команда завершена.
+2026-03-21 21:48:31 [main] DEBUG managers.CommandManager - Введена команда: <ва>
+2026-03-21 21:48:31 [main] ERROR managers.CommandManager - Неизвестная команда ва, введите help для справки.
+2026-03-21 21:48:31 [main] DEBUG managers.CommandManager - Команда завершена.
+2026-03-21 21:48:32 [main] DEBUG managers.CommandManager - Введена команда: <ав>
+2026-03-21 21:48:32 [main] ERROR managers.CommandManager - Неизвестная команда ав, введите help для справки.
+2026-03-21 21:48:32 [main] DEBUG managers.CommandManager - Команда завершена.
+2026-03-21 21:48:38 [main] DEBUG managers.CommandManager - Введена команда: <exir>
+2026-03-21 21:48:38 [main] ERROR managers.CommandManager - Неизвестная команда exir, введите help для справки.
+2026-03-21 21:48:38 [main] DEBUG managers.CommandManager - Команда завершена.
+2026-03-21 21:48:39 [main] DEBUG managers.CommandManager - Введена команда: <exir>
+2026-03-21 21:48:39 [main] ERROR managers.CommandManager - Неизвестная команда exir, введите help для справки.
+2026-03-21 21:48:39 [main] DEBUG managers.CommandManager - Команда завершена.
+2026-03-21 21:48:42 [main] DEBUG managers.CommandManager - Введена команда: <exit>
+2026-03-21 21:48:42 [main] INFO  commands.Exit - Программа завершена
+2026-03-22 11:38:49 [main] INFO  Main - ========================================================
+2026-03-22 11:38:49 [main] INFO  Main -           НОВЫЙ СЕАНС РАБОТЫ ПРОГРАММЫ ЗАПУЩЕН
+2026-03-22 11:38:49 [main] INFO  Main - Время запуска: 2026-03-22T11:38:49.594582700
+2026-03-22 11:38:49 [main] INFO  Main - ========================================================
+2026-03-22 11:38:49 [main] INFO  managers.CommandManager - Файл 'example.xml' был передан программе
+2026-03-22 11:38:49 [main] INFO  managers.FileManager - Загружено объектов: 2
+2026-03-22 11:38:49 [main] INFO  managers.CommandManager - Программа готова к работе.
+2026-03-22 11:38:49 [main] INFO  managers.CommandManager - Для справки введите 'help'.
+2026-03-22 11:38:52 [main] DEBUG managers.CommandManager - Введена команда: <add>
+2026-03-22 11:38:53 [main] DEBUG managers.Console - Введено имя продукта: <w>
+2026-03-22 11:38:56 [main] INFO  managers.Console - Введена координата x: <3.0>
+2026-03-22 11:38:56 [main] DEBUG managers.Console - Введена координата y: <3.0>
+2026-03-22 11:38:58 [main] DEBUG managers.Console - Введена цена: <24>
+2026-03-22 11:39:11 [main] DEBUG managers.Console - Введено имя владельца: <>
+2026-03-22 11:39:11 [main] ERROR managers.Console - Строка пустая! Где же владелец?
+2026-03-22 11:39:15 [main] DEBUG managers.Console - Введено имя владельца: <null>
+2026-03-22 11:39:15 [main] DEBUG managers.CommandManager - Команда завершена.
+2026-03-22 11:39:17 [main] DEBUG managers.CommandManager - Введена команда: <show>
+2026-03-22 11:39:17 [main] DEBUG managers.CommandManager - Команда завершена.
+2026-03-22 11:44:55 [main] INFO  Main - ========================================================
+2026-03-22 11:44:55 [main] INFO  Main -           НОВЫЙ СЕАНС РАБОТЫ ПРОГРАММЫ ЗАПУЩЕН
+2026-03-22 11:44:55 [main] INFO  Main - Время запуска: 2026-03-22T11:44:55.051866
+2026-03-22 11:44:55 [main] INFO  Main - ========================================================
+2026-03-22 11:44:55 [main] INFO  managers.CommandManager - Файл 'example.xml' был передан программе
+2026-03-22 11:44:55 [main] INFO  managers.FileManager - Загружено объектов: 2
+2026-03-22 11:44:55 [main] INFO  managers.CommandManager - Программа готова к работе.
+2026-03-22 11:44:55 [main] INFO  managers.CommandManager - Для справки введите 'help'.
+2026-03-22 11:44:58 [main] DEBUG managers.CommandManager - Введена команда: <info>
+2026-03-22 11:44:58 [main] DEBUG managers.CommandManager - Команда завершена.
+2026-03-22 19:59:29 [main] INFO  Main - ========================================================
+2026-03-22 19:59:29 [main] INFO  Main -           НОВЫЙ СЕАНС РАБОТЫ ПРОГРАММЫ ЗАПУЩЕН
+2026-03-22 19:59:29 [main] INFO  Main - Время запуска: 2026-03-22T19:59:29.757533200
+2026-03-22 19:59:29 [main] INFO  Main - ========================================================
+2026-03-22 19:59:29 [main] INFO  managers.CommandManager - Файл 'example.xml' был передан программе
+2026-03-22 19:59:29 [main] INFO  managers.FileManager - Загружено объектов: 2
+2026-03-22 19:59:29 [main] INFO  managers.CommandManager - Программа готова к работе.
+2026-03-22 19:59:29 [main] INFO  managers.CommandManager - Для справки введите 'help'.
+2026-03-22 19:59:33 [main] DEBUG managers.CommandManager - Введена команда: <save>
+2026-03-22 19:59:33 [main] INFO  managers.FileManager - Коллекция успешно сохранена в файл Collection.xml!
+2026-03-22 19:59:33 [main] DEBUG managers.CommandManager - Команда завершена.
+2026-03-22 19:59:36 [main] DEBUG managers.CommandManager - Введена команда: <exit>
+2026-03-22 19:59:36 [main] INFO  commands.Exit - Программа завершена
+2026-03-23 16:31:57 [main] INFO  Main - ========================================================
+2026-03-23 16:31:57 [main] INFO  Main -           НОВЫЙ СЕАНС РАБОТЫ ПРОГРАММЫ ЗАПУЩЕН
+2026-03-23 16:31:57 [main] INFO  Main - Время запуска: 2026-03-23T16:31:57.143506100
+2026-03-23 16:31:57 [main] INFO  Main - ========================================================
+2026-03-23 16:31:57 [main] INFO  managers.CommandManager - Файл 'example.xml' был передан программе
+2026-03-23 16:31:57 [main] INFO  managers.FileManager - Загружено объектов: 2
+2026-03-23 16:31:57 [main] INFO  managers.CommandManager - Программа готова к работе.
+2026-03-23 16:31:57 [main] INFO  managers.CommandManager - Для справки введите 'help'.
+2026-03-23 16:32:00 [main] DEBUG managers.CommandManager - Введена команда: <save>
+2026-03-23 16:32:00 [main] INFO  managers.FileManager - Коллекция успешно сохранена в файл Collection_16-32-00_23-03-2026.xml!
+2026-03-23 16:32:00 [main] INFO  commands.Command - Коллекция была сохранена в файл "Collection_16-32-00_23-03-2026.xml"
+2026-03-23 16:32:00 [main] DEBUG managers.CommandManager - Команда завершена.
+2026-03-23 16:32:13 [main] DEBUG managers.CommandManager - Введена команда: <save>
+2026-03-23 16:32:13 [main] INFO  managers.FileManager - Коллекция успешно сохранена в файл Collection_16-32-13_23-03-2026.xml!
+2026-03-23 16:32:13 [main] INFO  commands.Command - Коллекция была сохранена в файл "Collection_16-32-13_23-03-2026.xml"
+2026-03-23 16:32:13 [main] DEBUG managers.CommandManager - Команда завершена.

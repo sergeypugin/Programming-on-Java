@@ -1,0 +1,30 @@
+<collection>
+  <product>
+    <id>1</id>
+    <name>Apple</name>
+    <coordinates>
+      <x>10.5</x>
+      <y>20.0</y>
+    </coordinates>
+    <creationDate>1707635200000</creationDate>
+    <price>150</price>
+    <unitOfMeasure>GRAMS</unitOfMeasure>
+    <owner>
+      <name>Ivan</name>
+      <height>180</height>
+      <weight>75.5</weight>
+    </owner>
+  </product>
+  <product>
+    <id>2</id>
+    <name>Water</name>
+    <coordinates>
+      <x>5.0</x>
+      <y>100.0</y>
+    </coordinates>
+    <creationDate>1707635210000</creationDate>
+    <price>50</price>
+    <unitOfMeasure>MILLILITERS</unitOfMeasure>
+    <owner>null</owner>
+  </product>
+</collection>
