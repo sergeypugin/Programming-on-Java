@@ -41,7 +41,6 @@ public class ClientMain {
         logger.info("Приветствуем Вас в мини-приложении StoreForYou!");
         logger.info("Хотите стать нашим поставщиком?");
         logger.info("Изучите команды интерфейса приложения и добавляйте товары!\n");
-        logger.info("Для получения справки по командам введите 'help'");
 
         if (args.length > 0) {
             serverHost = args[0];
@@ -73,10 +72,10 @@ public class ClientMain {
                 return;
             }
 
-            logger.info("Авторизован как '{}'. Для справки введите 'help'.", currentUsername);
+            logger.info("Для справки введите 'help'.");
 
             while (true) {
-                console.helpfulPrint("Введите команду:\n$ ");
+                console.helpfulPrint("Введите команду: ", false);
                 if (!scanner.hasNextLine()) break;
                 String input = scanner.nextLine().trim();
                 processCommand(input);
@@ -99,7 +98,7 @@ public class ClientMain {
             String username = console.askUsername();
             String password = console.askPassword();
 
-            Request request = new Request(mode, "", null, username, password);
+            Request request = new Request(mode, null, null, username, password);
             Response response = sendAndReceive(request);
 
             if (response == null) {
@@ -112,7 +111,7 @@ public class ClientMain {
                 currentPassword = password;
                 return true;
             } else {
-                System.out.println("Попробуйте ещё раз.\n");
+                console.helpfulPrint("Что-то пошло не так. Попробуйте ещё раз.");
             }
         }
     }
@@ -215,15 +214,13 @@ public class ClientMain {
                 logger.error("Ошибка: сервер недоступен! Попробуйте позже или проверьте, запущен ли сервер");
                 return null;
             }
-
             receiveBuffer.flip();
             byte[] responseData = new byte[receiveBuffer.limit()];
             receiveBuffer.get(responseData);
 
             Response response = (Response) SerializationUtils.deserialize(responseData);
             if (response.isSuccess()) {
-                System.out.println(response.getMessage());
-                System.out.flush();
+                console.helpfulPrint(response.getMessage());
             } else {
                 logger.error(response.getMessage());
             }

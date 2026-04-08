@@ -11,7 +11,6 @@ import java.util.LinkedList;
 public class DatabaseManager {
     private static final Logger logger = LogManager.getLogger(DatabaseManager.class);
     private static final String DB_URL = "jdbc:postgresql://pg/studs";
-
     private final Connection connection;
 
     public DatabaseManager(String user, String password) throws SQLException {
@@ -75,6 +74,17 @@ public class DatabaseManager {
         return null;
     }
 
+    public synchronized long countProducts() throws SQLException {
+        String sql = "SELECT COUNT(*) FROM products";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(sql)) {
+            if (rs.next()) {
+                return rs.getLong(1);
+            }
+        }
+        return 0;
+    }
+
     public synchronized LinkedList<Product> loadAllProducts() throws SQLException {
         LinkedList<Product> list = new LinkedList<>();
         String sql = "SELECT * FROM products ORDER BY id";
@@ -83,7 +93,6 @@ public class DatabaseManager {
             while (rs.next()) {
                 list.add(createProductFromResultSet(rs));
             }
-            // TODO: разобраться, стоит ли использовать info или debug для этой записи
             logger.info("Загружено {} продуктов из базы данных", list.size());
         } catch (SQLException e) {
             logger.error("Ошибка загрузки продуктов из базы данных: {}", e.getMessage());
@@ -142,7 +151,6 @@ public class DatabaseManager {
         }
     }
 
-    // TODO: ну и нахер тут Tylor The Creator? По айди не разберёмся?
     public synchronized boolean deleteProduct(long id, String creator) throws SQLException {
         String sql = "DELETE FROM products WHERE id=? AND creator=?";
         try (PreparedStatement ps = connection.prepareStatement(sql)) {
@@ -188,7 +196,6 @@ public class DatabaseManager {
         }
 
         Product p = new Product(name, new Coordinates(x, y), price, unit, owner);
-        // TODO: проверить все айдишники на лонги
         p.setId(rs.getLong("id"));
         p.setCreationDate(new Date(rs.getLong("creation_date")));
         p.setCreatorUsername(creator);

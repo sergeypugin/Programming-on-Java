@@ -52,23 +52,31 @@ public class CommandManager {
 
     public Response reply(Request request) {
         String commandName = request.getCommandName().toLowerCase();
+        String username = request.getUsername();
+
         if (!PUBLIC_COMMANDS.contains(commandName)) {
-            if (!userManager.authenticate(request.getUsername(), request.getPassword())) {
-                logger.warn("Команда <{}> не выполнена: авторизация не пройдена.", commandName);
-                logger.warn("Было введено: логин = '{}', пароль = '{}'",
-                        request.getUsername(),request.getPassword());
-                // TODO а че надо использовать? Как общаться с чуваком на проводе?
+            if (!userManager.authenticate(username, request.getPassword())) {
+                logger.warn("Команда <{}> не выполнена для пользователя '{}': авторизация не пройдена.", commandName, username);
                 return new Response("Ошибка: необходима авторизация.\n" +
                         "Используйте 'login' или 'register'.", false);
             }
         }
+
         Command command = map.get(commandName);
         if (command == null) {
-            logger.warn("Получена неизвестная команда <{}>", commandName);
+            logger.warn("Получена неизвестная команда <{}> от пользователя '{}'", commandName, username);
             return new Response("Ошибка: команда <" + commandName + "> не найдена.\n" +
                     "Введите 'help' для справки.", false);
         }
-        logger.info("Выполняется команда '{}' (user={})", commandName, request.getUsername());
-        return command.execute(request);
+
+        logger.info("Выполняется команда '{}' (user={})", commandName, username);
+        Response response = command.execute(request);
+
+        if (response.isSuccess()) {
+            logger.info("Команда '{}' (user={}) успешно выполнена. Ответ: {}", commandName, username, response.getMessage());
+        } else {
+            logger.warn("Команда '{}' (user={}) завершилась с ошибкой. Ответ: {}", commandName, username, response.getMessage());
+        }
+        return response;
     }
 }

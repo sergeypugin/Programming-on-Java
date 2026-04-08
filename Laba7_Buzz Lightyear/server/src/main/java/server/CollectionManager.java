@@ -28,10 +28,12 @@ public class CollectionManager {
     public synchronized void loadFromDatabase() throws SQLException {
         collection.clear();
         try {
+            long count = db.countProducts();
+            if (count > Integer.MAX_VALUE) {
+                throw new IllegalStateException("Невозможно загрузить коллекцию в память: слишком много элементов в базе данных (" + count + "). Максимум: " + Integer.MAX_VALUE);
+            }
             collection.addAll(db.loadAllProducts());
             Collections.sort(collection);
-            // Внимание: загрузка всех продуктов в память может не выполниться,
-            // т.к. в базе данных - long, а в LinkedList - int
         } catch (SQLException e) {
             throw e;
         }
@@ -62,6 +64,10 @@ public class CollectionManager {
     // Всё для записи
 
     public synchronized boolean add(Product product, String creator) {
+        if (collection.size() >= Integer.MAX_VALUE) {
+            logger.error("Невозможно добавить новый элемент: коллекция заполнена.");
+            return false;
+        }
         try {
             product.setCreatorUsername(creator);
             long id = db.insertProduct(product, creator);
@@ -96,6 +102,7 @@ public class CollectionManager {
     }
 
     public synchronized boolean removeLast(String userName) {
+        if (collection.isEmpty()) return false;
         Product last = collection.getLast();
         return removeById(last.getId(), userName);
     }
@@ -119,8 +126,7 @@ public class CollectionManager {
 
     public synchronized long clearByCreator(String userName) {
         try {
-            // TODO: без (long)-а сработает?
-            long count = (long) db.deleteUserProducts(userName);
+            long count = db.deleteUserProducts(userName);
             collection.removeIf(p -> userName.equals(p.getCreatorUsername()));
             logger.debug("Пользователь {} удалил все свои {} продуктов", userName, count);
             return count;

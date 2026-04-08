@@ -16,17 +16,23 @@ public class Console {
     }
 
     public void helpfulPrint(String msg) {
+        helpfulPrint(msg, true);
+    }
+
+    public void helpfulPrint(String msg, boolean newLine) {
         if (isHelpfulTextNeeded) {
-            System.out.print(msg);
+            if (newLine) {
+                System.out.println(msg);
+            } else {
+                System.out.print(msg);
+            }
             System.out.flush();
         }
     }
 
-    public void setIsHelpfulTextNeeded(boolean x) { isHelpfulTextNeeded = x; }
+    public void setIsHelpfulTextNeeded(boolean x) { this.isHelpfulTextNeeded = x; }
     public void setScanner(Scanner scanner) { this.scanner = scanner; }
     public Scanner getScanner() { return this.scanner; }
-
-    // ────────────────────── Авторизация ──────────────────────
 
     /**
      * Запрашивает режим: вход или регистрация.
@@ -34,42 +40,30 @@ public class Console {
      */
     public String askAuthMode() {
         while (true) {
-            System.out.println("\n=== Добро пожаловать в StoreForYou! ===");
-            System.out.println("1) Войти в существующий аккаунт (login)");
-            System.out.println("2) Зарегистрироваться (register)");
-            System.out.print("Выберите действие (1/2): ");
+            helpfulPrint("Чтобы войти в существующий аккаунт, введите 1");
+            helpfulPrint("Чтобы зарегистрироваться, введите 2");
+            helpfulPrint("--> ", false);
             String choice = scanner.nextLine().trim();
             if (choice.equals("1")) return "login";
-            if (choice.equals("2")) return "register";
-            System.out.println("Введите 1 или 2.");
+            if (choice.equals("2")) {
+                helpfulPrint("Регистрация\n");
+                helpfulPrint("Имя пользователя: от 3 до 255 символов.");
+                helpfulPrint("Пароль: от 6 до 255 символов.\n");
+                return "register";
+            }
+            logger.error("Вы ввели '"+choice+"', попробуйте ещё раз.");
         }
     }
 
     public String askUsername() {
-        while (true) {
-            System.out.print("Логин: ");
-            String username = scanner.nextLine().trim();
-            if (username.isEmpty()) {
-                System.out.println("Логин не может быть пустым.");
-                continue;
-            }
-            return username;
-        }
+        helpfulPrint("Логин: ", false);
+        return scanner.nextLine();
     }
 
     public String askPassword() {
-        while (true) {
-            System.out.print("Пароль: ");
-            String password = scanner.nextLine(); // не trim — пароль может содержать пробелы
-            if (password.isEmpty()) {
-                System.out.println("Пароль не может быть пустым.");
-                continue;
-            }
-            return password;
-        }
+        helpfulPrint("Пароль: ", false);
+        return scanner.nextLine();
     }
-
-    // ─────────────────────── Продукт ────────────────────────
 
     public Product askProduct() {
         String name = askName();
@@ -82,7 +76,7 @@ public class Console {
 
     private String askName() {
         while (true) {
-            helpfulPrint("Введите имя продукта:\n$ ");
+            helpfulPrint("Введите имя продукта: ", false);
             String name = scanner.nextLine().trim();
             if (name.isEmpty()) { logger.error("Имя не может быть пустым."); continue; }
             return name;
@@ -90,16 +84,16 @@ public class Console {
     }
 
     private Coordinates askCoordinates() {
-        helpfulPrint("Введите координаты:\n");
+        helpfulPrint("Введите координаты:");
         double x;
         while (true) {
-            helpfulPrint("x (дробное с точкой):\n$ ");
+            helpfulPrint("x (дробное с точкой): ", false);
             try { x = Double.parseDouble(scanner.nextLine().trim()); break; }
             catch (NumberFormatException e) { logger.error("Введите дробное число."); }
         }
         Float y;
         while (true) {
-            helpfulPrint("y (дробное с точкой, > -93):\n$ ");
+            helpfulPrint("y (дробное с точкой, > -93): ", false);
             try {
                 y = Float.parseFloat(scanner.nextLine().trim());
                 if (y <= -93) { logger.error("y должен быть > -93."); continue; }
@@ -111,7 +105,7 @@ public class Console {
 
     private long askPrice() {
         while (true) {
-            helpfulPrint("Цена (натуральное число):\n$ ");
+            helpfulPrint("Цена (натуральное число): ", false);
             try {
                 long price = Long.parseLong(scanner.nextLine().trim());
                 if (price <= 0) { logger.error("Цена должна быть > 0."); continue; }
@@ -122,7 +116,7 @@ public class Console {
 
     private UnitOfMeasure askUnitOfMeasure() {
         while (true) {
-            helpfulPrint("Единица измерения " + java.util.Arrays.toString(UnitOfMeasure.values()) + ":\n$ ");
+            helpfulPrint("Единица измерения " + java.util.Arrays.toString(UnitOfMeasure.values()) + ": ", false);
             try { return UnitOfMeasure.valueOf(scanner.nextLine().trim().toUpperCase()); }
             catch (IllegalArgumentException e) { logger.error("Нет такой единицы."); }
         }
@@ -130,14 +124,14 @@ public class Console {
 
     private Person askOwner() {
         while (true) {
-            helpfulPrint("Имя владельца (или 'null'):\n$ ");
+            helpfulPrint("Имя владельца (или 'null'): ", false);
             String name = scanner.nextLine().trim().toLowerCase();
             if (name.isEmpty()) { logger.error("Строка пустая."); continue; }
             if (name.equals("null")) return null;
 
             Integer height;
             while (true) {
-                helpfulPrint("Рост владельца:\n$ ");
+                helpfulPrint("Рост владельца: ", false);
                 try {
                     height = Integer.parseInt(scanner.nextLine().trim());
                     if (height <= 0) { logger.error("Рост должен быть > 0."); continue; }
@@ -146,7 +140,7 @@ public class Console {
             }
             float weight;
             while (true) {
-                helpfulPrint("Вес владельца:\n$ ");
+                helpfulPrint("Вес владельца: ", false);
                 try {
                     weight = Float.parseFloat(scanner.nextLine().trim());
                     if (weight <= 0) { logger.error("Вес должен быть > 0."); continue; }
