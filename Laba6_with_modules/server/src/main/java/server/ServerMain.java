@@ -1,8 +1,6 @@
 package server;
 
-import common.forCommunicate.Request;
-import common.forCommunicate.Response;
-import common.forCommunicate.SerializationUtils;
+import common.forCommunicate.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import server.commands.Save;

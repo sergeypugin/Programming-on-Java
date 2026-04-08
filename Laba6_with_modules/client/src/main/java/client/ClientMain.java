@@ -8,7 +8,8 @@ import org.apache.logging.log4j.Logger;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.*;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.DatagramChannel;
 import java.util.HashSet;
@@ -99,7 +100,7 @@ public class ClientMain {
             executeScript(arg);
             return;
         }
-        // Команда работает с продуктом или нет?
+        // Проверяем, требует ли команда ввода данных о продукте
         Product product = null;
         if (commandName.equals("add") || commandName.equals("update")) {
             product = console.askProduct();
@@ -163,8 +164,10 @@ public class ClientMain {
             ByteBuffer receiveBuffer = ByteBuffer.allocate(65535);
             SocketAddress receivedAddress = null;
             long startTime = System.currentTimeMillis();
+            // Ожидаем ответ от сервера с таймаутом в 1 секунду
             while (receivedAddress == null && (System.currentTimeMillis() - startTime) < 1000) {
                 receivedAddress = channel.receive(receiveBuffer);
+                // Небольшая задержка, чтобы избежать чрезмерной загрузки ЦП при активном ожидании ответа
                 Thread.sleep(10);
             }
 

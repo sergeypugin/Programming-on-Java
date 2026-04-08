@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Настройка логгера для клиента -->
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Вывод логов в стандартную консоль -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <!-- Шаблон формата времени потока уровня и самого сообщения -->
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+    </Appenders>
+
+    <Loggers>
+        <!-- Базовый уровень логирования INFO (включает INFO WARN ERROR FATAL) -->
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>
