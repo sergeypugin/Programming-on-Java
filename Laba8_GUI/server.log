@@ -1,0 +1,455 @@
+2026-04-06 14:46:13.105 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-06 14:46:31.023 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-06 14:46:41.219 [main] ERROR server.ServerMain - Не удалось подключиться к БД: No suitable driver found for jdbc:postgresql://pg/studs
+2026-04-06 15:06:25.854 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-06 15:06:37.238 [main] ERROR server.ServerMain - Не удалось подключиться к БД: No suitable driver found for jdbc:postgresql://pg/studs
+2026-04-06 23:16:57.126 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-06 23:17:14.097 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-06 23:17:38.467 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-06 23:20:12.767 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-06 23:24:38.294 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-06 23:24:43.820 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-06 23:25:00.757 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-06 23:25:09.590 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-06 23:25:19.607 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-07 21:19:47.165 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-07 21:21:23.004 [main] ERROR server.ServerMain - Не удалось подключиться к БД: Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+2026-04-07 22:01:30.600 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-07 22:01:44.397 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-07 22:01:44.397 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:5433/studs) установлено
+2026-04-07 22:01:44.424 [main] INFO  server.DatabaseManager - Загружено 0 продуктов из базы данных
+2026-04-07 22:01:44.433 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-07 22:01:44.439 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-07 22:15:02.129 [Thread-0] INFO  server.ServerMain - Сервер останавливается по команде exit
+2026-04-19 19:49:48.322 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 19:56:11.861 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-19 19:57:11.573 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 19:57:20.126 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-19 20:00:12.570 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 20:00:24.278 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-19 20:00:39.515 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-19 20:01:11.207 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-19 20:03:49.332 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-19 20:03:57.693 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 20:04:13.479 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-19 20:09:42.232 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 20:09:54.892 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-19 20:10:42.823 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-19 20:11:11.944 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 20:11:22.406 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-19 20:12:24.055 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 20:12:43.833 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 20:12:53.548 [main] ERROR server.ServerMain - Не удалось подключиться к БД: FATAL: password authentication failed for user "s365809"
+2026-04-19 20:13:01.450 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-19 20:13:01.452 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:5432/studs) установлено
+2026-04-19 20:13:01.494 [main] INFO  server.DatabaseManager - Загружено 3 продуктов из базы данных
+2026-04-19 20:13:01.499 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-19 20:13:01.502 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-19 20:13:13.007 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:63954 (user=null)
+2026-04-19 20:13:13.008 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:13:16.606 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:64167 (user=null)
+2026-04-19 20:13:16.607 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:13:17.359 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:64168 (user=null)
+2026-04-19 20:13:17.360 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:13:17.360 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:64169 (user=null)
+2026-04-19 20:13:17.361 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:13:44.969 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:59500 (user=null)
+2026-04-19 20:13:44.969 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:59499 (user=sergey)
+2026-04-19 20:13:44.969 [ForkJoinPool-1-worker-3] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:59501 (user=null)
+2026-04-19 20:13:44.970 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 20:13:44.970 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:59502 (user=null)
+2026-04-19 20:13:44.970 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:13:44.971 [ForkJoinPool-2-worker-2] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:13:44.971 [ForkJoinPool-2-worker-4] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:13:45.005 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда 'login' (user=sergey) завершилась с ошибкой. Ответ: Ошибка: неверный логин или пароль
+2026-04-19 20:13:45.762 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:59505 (user=sergey)
+2026-04-19 20:13:45.762 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 20:13:45.762 [ForkJoinPool-1-worker-4] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:59504 (user=null)
+2026-04-19 20:13:45.763 [ForkJoinPool-2-worker-4] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:13:45.763 [ForkJoinPool-1-worker-4] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:59507 (user=null)
+2026-04-19 20:13:45.763 [ForkJoinPool-1-worker-3] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:59506 (user=null)
+2026-04-19 20:13:45.764 [ForkJoinPool-2-worker-4] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:13:45.764 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:59503 (user=null)
+2026-04-19 20:13:45.765 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:59508 (user=sergey)
+2026-04-19 20:13:45.765 [ForkJoinPool-2-worker-4] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:13:45.764 [ForkJoinPool-2-worker-2] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:13:45.765 [ForkJoinPool-1-worker-3] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:59509 (user=sergey)
+2026-04-19 20:13:45.765 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 20:13:45.765 [ForkJoinPool-2-worker-5] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 20:13:45.796 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда 'login' (user=sergey) завершилась с ошибкой. Ответ: Ошибка: неверный логин или пароль
+2026-04-19 20:13:45.828 [ForkJoinPool-2-worker-5] WARN  server.CommandManager - Команда 'login' (user=sergey) завершилась с ошибкой. Ответ: Ошибка: неверный логин или пароль
+2026-04-19 20:13:45.861 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда 'login' (user=sergey) завершилась с ошибкой. Ответ: Ошибка: неверный логин или пароль
+2026-04-19 20:13:52.118 [ForkJoinPool-1-worker-3] INFO  server.ServerMain - Получен запрос 'register' от /127.0.0.1:63288 (user=sergey)
+2026-04-19 20:13:52.118 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Выполняется команда 'register' (user=sergey)
+2026-04-19 20:13:52.215 [ForkJoinPool-2-worker-3] INFO  server.DatabaseManager - Зарегистрирован новый пользователь: sergey
+2026-04-19 20:13:52.215 [ForkJoinPool-2-worker-3] INFO  server.UserManager - Пользователь 'sergey' успешно зарегистрирован
+2026-04-19 20:13:52.216 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Команда 'register' (user=sergey) успешно выполнена. Ответ: Регистрация прошла успешно! Добро пожаловать, sergey!
+2026-04-19 20:14:06.488 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:58957 (user=null)
+2026-04-19 20:14:06.488 [ForkJoinPool-1-worker-5] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:58955 (user=sergey)
+2026-04-19 20:14:06.488 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:58956 (user=sergey)
+2026-04-19 20:14:06.489 [ForkJoinPool-2-worker-5] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 20:14:06.489 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:14:06.489 [ForkJoinPool-1-worker-5] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:58963 (user=sergey)
+2026-04-19 20:14:06.489 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 20:14:06.488 [ForkJoinPool-1-worker-4] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:58959 (user=sergey)
+2026-04-19 20:14:06.489 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:58962 (user=null)
+2026-04-19 20:14:06.488 [ForkJoinPool-1-worker-3] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:58954 (user=null)
+2026-04-19 20:14:06.488 [ForkJoinPool-1-worker-7] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:58958 (user=sergey)
+2026-04-19 20:14:06.489 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 20:14:06.489 [ForkJoinPool-2-worker-4] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:14:06.489 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:14:06.489 [ForkJoinPool-2-worker-4] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 20:14:06.489 [ForkJoinPool-1-worker-8] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:58961 (user=null)
+2026-04-19 20:14:06.489 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 20:14:06.488 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:58960 (user=sergey)
+2026-04-19 20:14:06.491 [ForkJoinPool-2-worker-8] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:14:06.491 [ForkJoinPool-2-worker-6] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 20:14:06.500 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:58964 (user=null)
+2026-04-19 20:14:06.500 [ForkJoinPool-2-worker-10] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:14:06.507 [ForkJoinPool-2-worker-5] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-19 20:14:06.553 [ForkJoinPool-2-worker-6] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-19 20:14:06.608 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-19 20:14:06.629 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58965 (user=sergey)
+2026-04-19 20:14:06.675 [ForkJoinPool-2-worker-4] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-19 20:14:06.721 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-19 20:14:06.750 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-19 20:14:06.758 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58966 (user=sergey)
+2026-04-19 20:14:06.782 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:06.812 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:06.833 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58967 (user=sergey)
+2026-04-19 20:14:06.873 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:06.901 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58968 (user=sergey)
+2026-04-19 20:14:06.938 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:07.003 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58969 (user=sergey)
+2026-04-19 20:14:07.022 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:07.096 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58970 (user=sergey)
+2026-04-19 20:14:07.153 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:11.638 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:62104 (user=sergey)
+2026-04-19 20:14:11.653 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:11.759 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:62105 (user=sergey)
+2026-04-19 20:14:11.775 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:11.836 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:62106 (user=sergey)
+2026-04-19 20:14:11.869 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:11.893 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:62107 (user=sergey)
+2026-04-19 20:14:11.904 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:62108 (user=sergey)
+2026-04-19 20:14:11.932 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:11.963 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:12.007 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:62109 (user=sergey)
+2026-04-19 20:14:12.025 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:12.100 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:62110 (user=sergey)
+2026-04-19 20:14:12.117 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:16.640 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51299 (user=sergey)
+2026-04-19 20:14:16.660 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:16.761 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51300 (user=sergey)
+2026-04-19 20:14:16.775 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:16.841 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51301 (user=sergey)
+2026-04-19 20:14:16.876 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:16.905 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51302 (user=sergey)
+2026-04-19 20:14:16.960 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:17.007 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51303 (user=sergey)
+2026-04-19 20:14:17.030 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:17.097 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51304 (user=sergey)
+2026-04-19 20:14:17.140 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:21.639 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51305 (user=sergey)
+2026-04-19 20:14:21.656 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:21.762 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51306 (user=sergey)
+2026-04-19 20:14:21.809 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:21.838 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51307 (user=sergey)
+2026-04-19 20:14:21.873 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:21.906 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51308 (user=sergey)
+2026-04-19 20:14:21.920 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:22.008 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:52497 (user=sergey)
+2026-04-19 20:14:22.047 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:22.104 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:52498 (user=sergey)
+2026-04-19 20:14:22.151 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:26.643 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:52499 (user=sergey)
+2026-04-19 20:14:26.660 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:26.762 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:52500 (user=sergey)
+2026-04-19 20:14:26.810 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:26.843 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:52501 (user=sergey)
+2026-04-19 20:14:26.862 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:26.908 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:52502 (user=sergey)
+2026-04-19 20:14:26.950 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:27.008 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:52503 (user=sergey)
+2026-04-19 20:14:27.041 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:27.099 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:52504 (user=sergey)
+2026-04-19 20:14:27.133 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:31.643 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:56818 (user=sergey)
+2026-04-19 20:14:31.664 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:31.761 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:56819 (user=sergey)
+2026-04-19 20:14:31.775 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:31.844 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:56820 (user=sergey)
+2026-04-19 20:14:31.879 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:31.945 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:56821 (user=sergey)
+2026-04-19 20:14:31.962 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:32.067 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:56822 (user=sergey)
+2026-04-19 20:14:32.113 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:32.148 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:56823 (user=sergey)
+2026-04-19 20:14:32.187 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:36.695 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:55470 (user=sergey)
+2026-04-19 20:14:36.714 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:36.817 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:55471 (user=sergey)
+2026-04-19 20:14:36.833 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:36.847 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:55472 (user=sergey)
+2026-04-19 20:14:36.891 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:36.972 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:55473 (user=sergey)
+2026-04-19 20:14:37.011 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:37.145 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:55474 (user=sergey)
+2026-04-19 20:14:37.156 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:55475 (user=sergey)
+2026-04-19 20:14:37.163 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:37.200 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:41.756 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51303 (user=sergey)
+2026-04-19 20:14:41.771 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:41.864 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51304 (user=sergey)
+2026-04-19 20:14:41.864 [ForkJoinPool-1-worker-11] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51305 (user=sergey)
+2026-04-19 20:14:41.903 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:41.935 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:41.985 [ForkJoinPool-1-worker-11] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51306 (user=sergey)
+2026-04-19 20:14:42.027 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:42.189 [ForkJoinPool-1-worker-11] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51308 (user=sergey)
+2026-04-19 20:14:42.189 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51307 (user=sergey)
+2026-04-19 20:14:42.219 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:42.248 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:46.755 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51309 (user=sergey)
+2026-04-19 20:14:46.771 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:46.942 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51310 (user=sergey)
+2026-04-19 20:14:46.958 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51311 (user=sergey)
+2026-04-19 20:14:46.982 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:47.022 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51312 (user=sergey)
+2026-04-19 20:14:47.035 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:47.101 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:47.237 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51313 (user=sergey)
+2026-04-19 20:14:47.253 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:47.257 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51314 (user=sergey)
+2026-04-19 20:14:47.271 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:51.814 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:61494 (user=sergey)
+2026-04-19 20:14:51.827 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:51.969 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:61495 (user=sergey)
+2026-04-19 20:14:52.010 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:52.010 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:61496 (user=sergey)
+2026-04-19 20:14:52.041 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:52.107 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:61497 (user=sergey)
+2026-04-19 20:14:52.123 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:52.306 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:61498 (user=sergey)
+2026-04-19 20:14:52.306 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:61499 (user=sergey)
+2026-04-19 20:14:52.324 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:52.350 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:56.811 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63960 (user=sergey)
+2026-04-19 20:14:56.827 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:56.968 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63961 (user=sergey)
+2026-04-19 20:14:57.010 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63962 (user=sergey)
+2026-04-19 20:14:57.015 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:57.055 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:57.108 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63963 (user=sergey)
+2026-04-19 20:14:57.144 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:57.308 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63965 (user=sergey)
+2026-04-19 20:14:57.308 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63964 (user=sergey)
+2026-04-19 20:14:57.323 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:14:57.363 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:01.814 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58672 (user=sergey)
+2026-04-19 20:15:01.843 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:01.969 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58673 (user=sergey)
+2026-04-19 20:15:01.999 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:02.019 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58674 (user=sergey)
+2026-04-19 20:15:02.072 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:02.107 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58675 (user=sergey)
+2026-04-19 20:15:02.126 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:02.308 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58676 (user=sergey)
+2026-04-19 20:15:02.313 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58677 (user=sergey)
+2026-04-19 20:15:02.344 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:02.375 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:06.813 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58678 (user=sergey)
+2026-04-19 20:15:06.831 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:06.969 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58679 (user=sergey)
+2026-04-19 20:15:07.014 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:07.018 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58680 (user=sergey)
+2026-04-19 20:15:07.035 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:07.104 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58681 (user=sergey)
+2026-04-19 20:15:07.135 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:07.312 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58683 (user=sergey)
+2026-04-19 20:15:07.312 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58682 (user=sergey)
+2026-04-19 20:15:07.351 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:07.385 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:11.815 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58784 (user=sergey)
+2026-04-19 20:15:11.832 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:11.970 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58785 (user=sergey)
+2026-04-19 20:15:11.987 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:12.016 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58786 (user=sergey)
+2026-04-19 20:15:12.050 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:12.111 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58787 (user=sergey)
+2026-04-19 20:15:12.147 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:12.312 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58788 (user=sergey)
+2026-04-19 20:15:12.312 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:58789 (user=sergey)
+2026-04-19 20:15:12.338 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:12.379 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:16.820 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63988 (user=sergey)
+2026-04-19 20:15:16.839 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:16.971 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63989 (user=sergey)
+2026-04-19 20:15:17.008 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:17.022 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63990 (user=sergey)
+2026-04-19 20:15:17.039 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:17.107 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63991 (user=sergey)
+2026-04-19 20:15:17.124 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:17.316 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63992 (user=sergey)
+2026-04-19 20:15:17.316 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63993 (user=sergey)
+2026-04-19 20:15:17.331 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:17.355 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:20.209 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'add' от /127.0.0.1:63994 (user=sergey)
+2026-04-19 20:15:20.235 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <add> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:21.818 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63995 (user=sergey)
+2026-04-19 20:15:21.835 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:21.972 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63996 (user=sergey)
+2026-04-19 20:15:22.007 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:22.018 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63216 (user=sergey)
+2026-04-19 20:15:22.035 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:22.108 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63217 (user=sergey)
+2026-04-19 20:15:22.123 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:22.317 [ForkJoinPool-1-worker-6] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63218 (user=sergey)
+2026-04-19 20:15:22.317 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63219 (user=sergey)
+2026-04-19 20:15:22.360 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:22.407 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:22.704 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63220 (user=sergey)
+2026-04-19 20:15:22.747 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:15:25.650 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:63221 (user=null)
+2026-04-19 20:15:25.650 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:15:26.815 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63222 (user=)
+2026-04-19 20:15:26.833 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя '': авторизация не пройдена.
+2026-04-19 20:15:26.977 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63223 (user=)
+2026-04-19 20:15:27.022 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:63224 (user=)
+2026-04-19 20:15:27.026 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <show> не выполнена для пользователя '': авторизация не пройдена.
+2026-04-19 20:15:27.082 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя '': авторизация не пройдена.
+2026-04-19 20:15:27.110 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:59351 (user=)
+2026-04-19 20:15:27.127 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя '': авторизация не пройдена.
+2026-04-19 20:15:27.312 [ForkJoinPool-1-worker-9] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:59352 (user=)
+2026-04-19 20:15:27.326 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя '': авторизация не пройдена.
+2026-04-19 20:22:48.096 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 20:22:59.980 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-19 20:22:59.980 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:5432/studs) установлено
+2026-04-19 20:23:00.057 [main] INFO  server.DatabaseManager - Загружено 3 продуктов из базы данных
+2026-04-19 20:23:00.082 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-19 20:23:00.087 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-19 20:23:07.269 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:61622 (user=null)
+2026-04-19 20:23:07.269 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:61623 (user=null)
+2026-04-19 20:23:07.273 [ForkJoinPool-2-worker-2] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:23:07.273 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:23:17.025 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:54040 (user=sergey)
+2026-04-19 20:23:17.025 [ForkJoinPool-1-worker-3] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:54042 (user=null)
+2026-04-19 20:23:17.025 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:54041 (user=null)
+2026-04-19 20:23:17.025 [ForkJoinPool-1-worker-4] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:54043 (user=null)
+2026-04-19 20:23:17.025 [ForkJoinPool-2-worker-2] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:23:17.025 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:23:17.026 [ForkJoinPool-2-worker-3] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:23:17.026 [ForkJoinPool-2-worker-4] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 20:23:17.049 [ForkJoinPool-2-worker-4] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-19 20:23:17.111 [ForkJoinPool-1-worker-4] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:54044 (user=sergey)
+2026-04-19 20:23:17.144 [ForkJoinPool-2-worker-4] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:23:22.113 [ForkJoinPool-1-worker-4] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:59822 (user=sergey)
+2026-04-19 20:23:22.133 [ForkJoinPool-2-worker-4] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:23:27.123 [ForkJoinPool-1-worker-4] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:53513 (user=sergey)
+2026-04-19 20:23:27.140 [ForkJoinPool-2-worker-4] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:23:32.125 [ForkJoinPool-1-worker-4] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:53514 (user=sergey)
+2026-04-19 20:23:32.140 [ForkJoinPool-2-worker-4] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 20:43:57.485 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 20:47:47.126 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 20:48:02.825 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-19 20:48:02.826 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:5432/studs) установлено
+2026-04-19 20:48:02.931 [main] INFO  server.DatabaseManager - Загружено 3 продуктов из базы данных
+2026-04-19 20:48:02.934 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-19 20:48:02.936 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-19 20:48:18.823 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:50660 (user=null)
+2026-04-19 20:48:18.826 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:51:19.012 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 20:51:19.608 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-19 20:51:19.609 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:5432/studs) установлено
+2026-04-19 20:51:19.652 [main] INFO  server.DatabaseManager - Загружено 3 продуктов из базы данных
+2026-04-19 20:51:19.657 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-19 20:51:19.659 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-19 20:51:33.343 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:58815 (user=null)
+2026-04-19 20:51:33.344 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <ping> не выполнена для пользователя 'null': авторизация не пройдена.
+2026-04-19 20:53:13.366 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 20:53:13.924 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-19 20:53:13.925 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:5432/studs) установлено
+2026-04-19 20:53:13.988 [main] INFO  server.DatabaseManager - Загружено 3 продуктов из базы данных
+2026-04-19 20:53:13.993 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-19 20:53:13.996 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-19 20:53:17.102 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:62461 (user=null)
+2026-04-19 20:53:17.102 [ForkJoinPool-1-worker-3] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:62462 (user=null)
+2026-04-19 20:53:17.102 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:62460 (user=null)
+2026-04-19 20:53:17.106 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:17.106 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:17.106 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:17.107 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:17.107 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:17.107 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:45.992 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:64265 (user=null)
+2026-04-19 20:53:45.992 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:64263 (user=null)
+2026-04-19 20:53:45.993 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:45.992 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:45.993 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:45.993 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:45.994 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:64264 (user=null)
+2026-04-19 20:53:45.994 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:45.994 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:51.697 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:54189 (user=null)
+2026-04-19 20:53:51.697 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:54188 (user=null)
+2026-04-19 20:53:51.697 [ForkJoinPool-1-worker-3] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:54190 (user=null)
+2026-04-19 20:53:51.697 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:51.697 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:51.697 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:51.699 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:51.697 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:51.699 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:52.840 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:54192 (user=null)
+2026-04-19 20:53:52.840 [ForkJoinPool-1-worker-3] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:54191 (user=null)
+2026-04-19 20:53:52.840 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:54193 (user=null)
+2026-04-19 20:53:52.842 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:52.842 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:52.842 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:52.843 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:52.843 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:52.843 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:55.778 [ForkJoinPool-1-worker-4] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:64287 (user=null)
+2026-04-19 20:53:55.778 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:64286 (user=null)
+2026-04-19 20:53:55.778 [ForkJoinPool-1-worker-3] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:64288 (user=null)
+2026-04-19 20:53:55.778 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:55.778 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:55.778 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:55.778 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 20:53:55.778 [ForkJoinPool-2-worker-3] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 20:53:55.779 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: ping
+2026-04-19 21:30:28.347 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-19 21:30:29.081 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-19 21:30:29.082 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:5432/studs) установлено
+2026-04-19 21:30:29.120 [main] INFO  server.DatabaseManager - Загружено 3 продуктов из базы данных
+2026-04-19 21:30:29.123 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-19 21:30:29.127 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-19 21:31:45.076 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:60828 (user=null)
+2026-04-19 21:31:45.079 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-19 21:31:45.080 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: I'm okay
+2026-04-19 21:31:59.267 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:60024 (user=sergey)
+2026-04-19 21:31:59.267 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-19 21:31:59.291 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-19 21:31:59.412 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:60025 (user=sergey)
+2026-04-19 21:31:59.445 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 21:32:04.418 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:60026 (user=sergey)
+2026-04-19 21:32:04.441 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 21:32:09.411 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:52785 (user=sergey)
+2026-04-19 21:32:09.432 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 21:32:14.417 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51024 (user=sergey)
+2026-04-19 21:32:14.436 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 21:32:19.415 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51025 (user=sergey)
+2026-04-19 21:32:19.431 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 21:32:24.420 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:51026 (user=sergey)
+2026-04-19 21:32:24.437 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 21:32:29.420 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:55873 (user=sergey)
+2026-04-19 21:32:29.436 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 21:32:34.418 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:55874 (user=sergey)
+2026-04-19 21:32:34.441 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 21:32:34.551 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'add' от /127.0.0.1:55875 (user=sergey)
+2026-04-19 21:32:34.567 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <add> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 21:32:36.957 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:55876 (user=sergey)
+2026-04-19 21:32:36.990 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 21:32:39.415 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:55877 (user=sergey)
+2026-04-19 21:32:39.448 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
+2026-04-19 21:32:44.417 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'show' от /127.0.0.1:57622 (user=sergey)
+2026-04-19 21:32:44.436 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда <show> не выполнена для пользователя 'sergey': авторизация не пройдена.
