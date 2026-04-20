@@ -46,18 +46,26 @@ public class ServerMain {
         }
         Scanner sc = new Scanner(System.in);
         DatabaseManager dbManager;
-        while (true) {
-            System.out.print("Логин для БД: ");
-//            String dbUser = sc.nextLine().trim();
-            String dbUser="s365809"; //TODO to delete
-            System.out.print("Пароль для БД: ");
-//            String dbPassword = sc.nextLine().trim();
-            String dbPassword="DQvEZD1xtSBSXNNT";//TODO to delete
-            try {
-                dbManager = new DatabaseManager(dbUser, dbPassword);
-                break;
-            } catch (SQLException e) {
-                logger.error("Не удалось подключиться к БД: {}", e.getMessage());
+        String dbUser = System.getenv("DB_USER");
+        String dbPassword = System.getenv("DB_PASSWORD");
+        try {
+            dbManager = new DatabaseManager(dbUser, dbPassword);
+        } catch (SQLException e1) {
+            logger.error("Не удалось подключиться к БД с переменными окружениями (возможно их просто нет): {}",
+                    e1.getMessage());
+            logger.info("Введите данные для подключения к БД");
+            logger.info("");
+            while (true) {
+                System.out.print("Логин для БД: ");
+                dbUser = sc.nextLine().trim();
+                System.out.print("Пароль для БД: ");
+                dbPassword = sc.nextLine().trim();
+                try{
+                    dbManager = new DatabaseManager(dbUser, dbPassword);
+                    break;
+                } catch (SQLException e2) {
+                    logger.error("Не удалось подключиться к БД: {}", e2.getMessage());
+                }
             }
         }
         UserManager userManager = new UserManager(dbManager);
