@@ -70,6 +70,8 @@ public class CommandManager {
                     "Введите 'help' для справки.", false);
         }
 
+        Response response = command.execute(request);
+        if (commandName.equals("show")) return response;
         logger.info("Выполняется команда '{}' (user={})", commandName, username);
         Response response = command.execute(request);
 
