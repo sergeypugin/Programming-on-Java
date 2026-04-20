@@ -118,7 +118,8 @@ public class ServerMain {
                 readPool.execute(() -> {
                     try {
                         Request request = (Request) SerializationUtils.deserialize(data);
-                        logger.info("Получен запрос '{}' от {} (user={})",
+                        if (!request.getCommandName().equals("show"))
+                            logger.info("Получен запрос '{}' от {} (user={})",
                                 request.getCommandName(), addr, request.getUsername());
                         processPool.execute(() -> {
                             Response response = commandManager.reply(request);
