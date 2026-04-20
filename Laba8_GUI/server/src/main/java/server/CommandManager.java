@@ -73,8 +73,6 @@ public class CommandManager {
         Response response = command.execute(request);
         if (commandName.equals("show")) return response;
         logger.info("Выполняется команда '{}' (user={})", commandName, username);
-        Response response = command.execute(request);
-
         if (response.isSuccess()) {
             logger.info("Команда '{}' (user={}) успешно выполнена. Ответ: {}", commandName, username, response.getMessage());
         } else {
