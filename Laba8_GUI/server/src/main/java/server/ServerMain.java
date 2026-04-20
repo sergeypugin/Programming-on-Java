@@ -22,10 +22,10 @@ import java.util.concurrent.ForkJoinPool;
  * <p>
  * Архитектура многопоточной обработки запросов:
  * <ul>
- *   <li>Главный поток — неблокирующий приём UDP-пакетов</li>
- *   <li>{@link ForkJoinPool} readPool — десериализация входящего пакета</li>
- *   <li>{@link ForkJoinPool} processPool — выполнение команды (с аутентификацией)</li>
- *   <li>Fixed Thread Pool sendPool — сериализация и отправка ответа клиенту</li>
+ *   <li>Главный поток - неблокирующий приём UDP-пакетов</li>
+ *   <li>{@link ForkJoinPool} readPool - десериализация входящего пакета</li>
+ *   <li>{@link ForkJoinPool} processPool - выполнение команды (с аутентификацией)</li>
+ *   <li>Fixed Thread Pool sendPool  сериализация и отправка ответа клиенту</li>
  * </ul>
  * Доступ к коллекции синхронизирован через {@code synchronized} в {@link CollectionManager}.
  */
