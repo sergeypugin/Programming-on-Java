@@ -23,7 +23,7 @@ public class CommandManager {
     private final Map<String, Command> map = new HashMap<>();
     private final UserManager userManager;
 
-    public CommandManager(CollectionManager cm, UserManager userManager, DatabaseManager db) {
+    public CommandManager(CollectionManager cm, UserManager userManager) {
         this.userManager = userManager;
 
         // Публичные команды
