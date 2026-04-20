@@ -74,7 +74,7 @@ public class ServerMain {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        CommandManager commandManager = new CommandManager(collectionManager, userManager, dbManager);
+        CommandManager commandManager = new CommandManager(collectionManager, userManager);
 
         ForkJoinPool readPool = new ForkJoinPool();
         ForkJoinPool processPool = new ForkJoinPool();
