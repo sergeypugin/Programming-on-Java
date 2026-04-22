@@ -61,7 +61,7 @@ public class MainFrame extends JFrame {
 
     private final java.util.Map<String, JButton> buttons = new java.util.LinkedHashMap<>();
 
-    private Timer refreshTimer;
+    private final Timer refreshTimer;
     private List<Product> currentProducts = Collections.emptyList();
     private List<Product> displayedProducts = Collections.emptyList();
     private int sortColumnIndex = 0;

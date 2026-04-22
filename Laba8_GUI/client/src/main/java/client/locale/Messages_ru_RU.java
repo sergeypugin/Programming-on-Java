@@ -63,6 +63,7 @@ public class Messages_ru_RU extends ListResourceBundle {
                 {"msg.server_check", "Проверка подключения к серверу..."},
                 {"msg.auth_fail", "Неверный логин или пароль."},
                 {"msg.register_ok", "Регистрация успешна! Теперь войдите."},
+                {"msg.user_exists", "Пользователь с таким логином уже существует."},
                 {"msg.confirm_del", "Удалить выбранный объект?"},
                 {"msg.confirm_clear", "Удалить все СВОИ объекты из коллекции?"},
                 {"msg.no_sel", "Ничего не выбрано."},

@@ -63,6 +63,7 @@ public class Messages_hu_HU extends ListResourceBundle {
                 {"msg.server_check", "Szerver elérhetőségének ellenőrzése..."},
                 {"msg.auth_fail", "Hibás felhasználónév vagy jelszó."},
                 {"msg.register_ok", "Sikeres regisztráció! Most jelentkezzen be."},
+                {"msg.user_exists", "Már létezik felhasználó ezzel a névvel."},
                 {"msg.confirm_del", "Törli a kijelölt elemet?"},
                 {"msg.confirm_clear", "Törli az összes SAJÁT elemét a gyűjteményből?"},
                 {"msg.no_sel", "Nincs kijelölt elem."},

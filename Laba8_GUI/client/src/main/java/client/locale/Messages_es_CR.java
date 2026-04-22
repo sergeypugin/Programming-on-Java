@@ -63,6 +63,7 @@ public class Messages_es_CR extends ListResourceBundle {
                 {"msg.server_check", "Verificando conexión con el servidor..."},
                 {"msg.auth_fail", "Usuario o contraseña incorrectos."},
                 {"msg.register_ok", "¡Registro exitoso! Ahora inicie sesión."},
+                {"msg.user_exists", "Ya existe un usuario con este nombre."},
                 {"msg.confirm_del", "¿Eliminar el elemento seleccionado?"},
                 {"msg.confirm_clear", "¿Eliminar todos SUS elementos de la colección?"},
                 {"msg.no_sel", "Ningún elemento seleccionado."},

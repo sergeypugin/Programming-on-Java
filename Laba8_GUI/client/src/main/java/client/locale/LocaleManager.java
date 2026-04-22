@@ -13,7 +13,7 @@ public class LocaleManager {
 
 
     public static final Locale[] AVAILABLE_LOCALES = {
-            new Locale("ru", "RU"),
+            new Locale("ru", "RU"), // дефолтная локаль
             new Locale("pt", "BR"),
             new Locale("hu", "HU"),
             new Locale("es", "CR")
@@ -25,7 +25,7 @@ public class LocaleManager {
 
     private LocaleManager() {
         setLocale(AVAILABLE_LOCALES[0]);
-    }
+    }// дефолтная локаль - ru
 
     public static LocaleManager get() {
         if (instance == null) instance = new LocaleManager();
