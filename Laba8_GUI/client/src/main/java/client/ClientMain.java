@@ -25,7 +25,7 @@ public class ClientMain {
             catch (NumberFormatException e) { /* оставляем дефолт */ }
         }
 
-        NetworkClient.init(serverHost, serverPort);
+        NetworkClient.initialize(serverHost, serverPort);
         LocaleManager.get();
         SwingUtilities.invokeLater(() -> {
             try {

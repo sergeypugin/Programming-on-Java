@@ -21,7 +21,7 @@ public class Count_by_unit_of_measure implements Command {
             UnitOfMeasure unit = UnitOfMeasure.valueOf(request.getArgument().trim().toUpperCase());
             long count = cm.countByUnitOfMeasure(unit);
 
-            return new Response("Количество элементов с единицей измерения " + unit + ": " + count, true);
+            return new Response("Количество элементов с единицей измерения " + unit + ": " + count, true, count);
         } catch (IllegalArgumentException e) {
             return new Response("Ошибка: такой единицы измерения не существует. " + e.getMessage(), false);
         }

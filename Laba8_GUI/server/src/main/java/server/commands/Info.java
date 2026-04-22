@@ -2,6 +2,7 @@ package server.commands;
 
 import common.forCommunicate.Request;
 import common.forCommunicate.Response;
+import common.forCommunicate.CollectionInfo;
 import server.CollectionManager;
 
 /**
@@ -16,10 +17,15 @@ public class Info implements Command {
 
     @Override
     public Response execute(Request request) {
+        CollectionInfo infoData = new CollectionInfo(
+                "java.util.LinkedList",
+                cm.getCreationDate(),
+                cm.size()
+        );
         String info = "Информация о коллекции:\n" +
-                "Тип: " + cm.getCollection().getClass().getName() + "\n" +
-                "Дата инициализации: " + cm.getCreationDate() + "\n" +
-                "Количество элементов: " + cm.getCollection().size();
-        return new Response(info, true);
+                "Тип: " + infoData.getCollectionType() + "\n" +
+                "Дата инициализации: " + infoData.getCreationDate() + "\n" +
+                "Количество элементов: " + infoData.getSize();
+        return new Response(info, true, infoData);
     }
 }

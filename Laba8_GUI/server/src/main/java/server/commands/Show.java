@@ -1,9 +1,12 @@
 package server.commands;
 
+import common.data.Product;
 import common.forCommunicate.Request;
 import common.forCommunicate.Response;
+import common.forCommunicate.ShowData;
 import server.CollectionManager;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -18,14 +21,17 @@ public class Show implements Command {
 
     @Override
     public Response execute(Request request) {
-        if (cm.getCollection().isEmpty()) {
-            return new Response("Коллекция пуста.", true);
+        List<Product> products = cm.getCollectionSnapshot();
+        ShowData data = new ShowData(products);
+
+        if (products.isEmpty()) {
+            return new Response("Коллекция пуста.", true, data);
         }
 
-        String result = cm.getCollection().stream()
+        String result = products.stream()
                 .map(Object::toString)
                 .collect(Collectors.joining("\n"));
 
-        return new Response(result, true);
+        return new Response(result, true, data);
     }
 }

@@ -23,14 +23,10 @@ public class Filter_by_owner implements Command {
         String ownerName = request.getArgument().trim();
         List<Product> filtered = cm.filterByOwner(ownerName);
 
-        if (filtered.isEmpty()) {
-            return new Response("Элементов с таким владельцем не найдено.", true);
-        }
-
         String result = filtered.stream()
                 .map(Product::toString)
                 .collect(Collectors.joining("\n"));
 
-        return new Response(result, true);
+        return new Response(result, true, filtered);
     }
 }

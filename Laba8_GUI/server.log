@@ -8,3 +8,67 @@
 2026-04-20 17:30:57.643 [main] INFO  server.DatabaseManager - Загружено 0 продуктов из базы данных
 2026-04-20 17:30:57.654 [main] INFO  server.CommandManager - Все команды инициализированы
 2026-04-20 17:30:57.657 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-20 23:56:32.436 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-20 23:56:35.453 [main] ERROR server.ServerMain - Не удалось подключиться к БД с переменными окружениями (возможно их просто нет): The connection attempt failed.
+2026-04-20 23:56:35.453 [main] INFO  server.ServerMain - Введите данные для подключения к БД
+2026-04-20 23:56:35.453 [main] INFO  server.ServerMain - 
+2026-04-21 11:08:53.400 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-21 22:20:44.606 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-21 22:20:47.680 [main] ERROR server.ServerMain - Не удалось подключиться к БД с переменными окружениями (возможно их просто нет): The connection attempt failed.
+2026-04-21 22:20:47.682 [main] INFO  server.ServerMain - Введите данные для подключения к БД
+2026-04-21 22:20:47.682 [main] INFO  server.ServerMain - 
+2026-04-21 22:23:20.672 [main] ERROR server.ServerMain - Не удалось подключиться к БД: The connection attempt failed.
+2026-04-21 22:23:51.208 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-21 22:23:54.178 [main] ERROR server.ServerMain - Не удалось подключиться к БД с переменными окружениями (возможно их просто нет): The connection attempt failed.
+2026-04-21 22:23:54.180 [main] INFO  server.ServerMain - Введите данные для подключения к БД
+2026-04-21 22:23:54.180 [main] INFO  server.ServerMain - 
+2026-04-21 22:34:54.928 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-21 22:34:54.991 [main] ERROR server.ServerMain - Не удалось подключиться к БД с переменными окружениями (возможно их просто нет): Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+2026-04-21 22:34:54.992 [main] INFO  server.ServerMain - Введите данные для подключения к БД
+2026-04-21 22:34:54.992 [main] INFO  server.ServerMain - 
+2026-04-21 22:35:22.408 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-21 22:35:22.457 [main] ERROR server.ServerMain - Не удалось подключиться к БД с переменными окружениями (возможно их просто нет): Connection to localhost:5432 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+2026-04-21 22:35:22.458 [main] INFO  server.ServerMain - Введите данные для подключения к БД
+2026-04-21 22:35:22.458 [main] INFO  server.ServerMain - 
+2026-04-21 22:36:09.849 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-21 22:36:10.518 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-21 22:36:10.519 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:9876/studs) установлено
+2026-04-21 22:36:10.602 [main] INFO  server.DatabaseManager - Загружено 0 продуктов из базы данных
+2026-04-21 22:36:10.610 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-21 22:36:10.612 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-21 22:36:16.436 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:55538 (user=null)
+2026-04-21 22:36:16.440 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-21 22:36:16.440 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: I'm okay
+2026-04-21 22:51:59.880 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-21 22:52:00.699 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-21 22:52:00.700 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:9876/studs) установлено
+2026-04-21 22:52:00.749 [main] INFO  server.DatabaseManager - Загружено 0 продуктов из базы данных
+2026-04-21 22:52:00.759 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-21 22:52:00.762 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-21 22:52:12.327 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:52518 (user=null)
+2026-04-21 22:52:12.329 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-21 22:52:12.329 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: I'm okay
+2026-04-21 22:52:55.514 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:52519 (user=er)
+2026-04-21 22:52:55.537 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=er)
+2026-04-21 22:52:55.537 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда 'login' (user=er) завершилась с ошибкой. Ответ: Ошибка: неверный логин или пароль
+2026-04-21 22:52:57.188 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:52520 (user=er)
+2026-04-21 22:52:57.253 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=er)
+2026-04-21 22:52:57.253 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда 'login' (user=er) завершилась с ошибкой. Ответ: Ошибка: неверный логин или пароль
+2026-04-21 22:53:04.038 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:52521 (user=sergey)
+2026-04-21 22:53:04.075 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-21 22:53:04.075 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда 'login' (user=sergey) завершилась с ошибкой. Ответ: Ошибка: неверный логин или пароль
+2026-04-22 01:41:28.083 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-22 01:41:28.917 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-22 01:41:28.918 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:9876/studs) установлено
+2026-04-22 01:41:28.970 [main] INFO  server.DatabaseManager - Загружено 0 продуктов из базы данных
+2026-04-22 01:41:28.977 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-22 01:41:28.981 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-22 01:41:46.168 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-22 01:41:46.960 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-22 01:41:46.960 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:9876/studs) установлено
+2026-04-22 01:41:47.035 [main] INFO  server.DatabaseManager - Загружено 0 продуктов из базы данных
+2026-04-22 01:41:47.040 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-22 01:41:47.043 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-22 01:41:50.426 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:52694 (user=null)
+2026-04-22 01:41:50.429 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-22 01:41:50.429 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: I'm okay

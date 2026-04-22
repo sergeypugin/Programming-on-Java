@@ -1,13 +1,16 @@
 package common.forCommunicate;
 
 import common.data.Product;
+
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * Класс-запрос клиента серверу
  */
 public class Request implements Serializable {
-    private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 2L;
 
     private final String commandName;
     private final String argument;

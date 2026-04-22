@@ -9,15 +9,15 @@ import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.text.DateFormat;
+import java.text.NumberFormat;
 import java.util.*;
 import java.util.List;
 import java.util.function.Consumer;
 
 /**
  * Панель визуализации коллекции.
- *
- * Каждый продукт — цветной кружок, радиус ∝ цене.
- * Разные владельцы (createdBy) — разные цвета.
+ * Каждый продукт - цветной кружок, радиус - цена.
+ * Разные владельцы (createdBy) - разные цвета.
  * Анимация: при появлении объект «вырастает» из центра.
  * Клик на объект → всплывающая информация.
  */
@@ -27,18 +27,17 @@ public class VisualizationPanel extends JPanel {
     private final Map<Long, Float> animProgress = new HashMap<>();
     private final Map<String, Color> userColors = new HashMap<>();
     private static final Color[] PALETTE = {
-        new Color(70, 130, 180),  // steel blue
-        new Color(220, 80,  80),  // red
-        new Color(80,  180, 80),  // green
-        new Color(230, 160, 40),  // orange
-        new Color(150, 80,  200), // purple
-        new Color(40,  190, 190), // teal
-        new Color(220, 100, 160), // pink
+            new Color(70, 130, 180),  // steel blue
+            new Color(220, 80,  80),  // red
+            new Color(80,  180, 80),  // green
+            new Color(230, 160, 40),  // orange
+            new Color(150, 80,  200), // purple
+            new Color(40,  190, 190), // teal
+            new Color(220, 100, 160), // pink
     };
 
     private List<Product> products = Collections.emptyList();
     private Consumer<Product> onProductClick; // callback для отображения инфо
-    private Timer animTimer;
 
     // Маппинг id → целевой радиус (чтобы не пересчитывать)
     private final Map<Long, Integer> radii = new HashMap<>();
@@ -53,7 +52,7 @@ public class VisualizationPanel extends JPanel {
             }
         });
         // Анимационный таймер ~60 fps
-        animTimer = new Timer(16, e -> {
+        Timer animTimer = new Timer(16, e -> {
             boolean anyUpdated = false;
             for (long id : new HashSet<>(animProgress.keySet())) {
                 float p = animProgress.get(id);
@@ -153,7 +152,7 @@ public class VisualizationPanel extends JPanel {
 
     private void handleClick(int mx, int my) {
         int W = getWidth(), H = getHeight();
-        // Обходим в обратном порядке — верхний слой первым
+        // Обходим в обратном порядке  верхний слой первым
         for (int i = products.size() - 1; i >= 0; i--) {
             Product p = products.get(i);
             int cx = W / 2 + (int)(p.getCoordinates().getX() * 2);
@@ -188,14 +187,18 @@ public class VisualizationPanel extends JPanel {
         DateFormat df = DateFormat.getDateTimeInstance(
                 DateFormat.MEDIUM, DateFormat.SHORT,
                 LocaleManager.get().getCurrentLocale());
+        NumberFormat nf = NumberFormat.getNumberInstance(LocaleManager.get().getCurrentLocale());
         String info = "<html><b>ID:</b> " + p.getId() +
-                "<br><b>Название:</b> " + p.getName() +
-                "<br><b>Координаты:</b> (" + p.getCoordinates().getX() + ", " + p.getCoordinates().getY() + ")" +
-                "<br><b>Цена:</b> " + p.getPrice() +
-                "<br><b>Ед.изм.:</b> " + p.getUnitOfMeasure() +
-                "<br><b>Владелец:</b> " + (p.getOwner() != null ? p.getOwner().getName() : "—") +
-                "<br><b>Дата:</b> " + df.format(p.getCreationDate()) +
-                "<br><b>Автор:</b> " + (p.getCreatorUsername() != null ? p.getCreatorUsername() : "—") +
+                "<br><b>" + LocaleManager.s("col.name")   + "</b> " + p.getName() +
+                "<br><b>" + LocaleManager.s("col.x")      + " / " + LocaleManager.s("col.y") + ":</b> (" +
+                nf.format(p.getCoordinates().getX()) + ", " + nf.format(p.getCoordinates().getY()) + ")" +
+                "<br><b>" + LocaleManager.s("col.price")  + ":</b> " + nf.format(p.getPrice()) +
+                "<br><b>" + LocaleManager.s("col.unit")   + ":</b> " + p.getUnitOfMeasure() +
+                "<br><b>" + LocaleManager.s("col.owner")  + ":</b> " +
+                (p.getOwner() != null ? p.getOwner().getName() : "—") +
+                "<br><b>" + LocaleManager.s("col.date")   + ":</b> " + df.format(p.getCreationDate()) +
+                "<br><b>" + LocaleManager.s("col.created_by") + ":</b> " +
+                (p.getCreatorUsername() != null ? p.getCreatorUsername() : "—") +
                 "</html>";
         JOptionPane.showMessageDialog(parent, info,
                 LocaleManager.s("vis.info_title"), JOptionPane.INFORMATION_MESSAGE);

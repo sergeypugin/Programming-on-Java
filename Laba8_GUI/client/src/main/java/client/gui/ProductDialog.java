@@ -8,6 +8,8 @@ import common.data.UnitOfMeasure;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.NumberFormat;
+import java.text.ParseException;
 
 /**
  * Диалог добавления / редактирования продукта.
@@ -28,7 +30,7 @@ public class ProductDialog extends JDialog {
 
     /**
      * @param parent  родительский фрейм
-     * @param initial null — режим добавления, иначе — редактирование
+     * @param initial null - режим добавления, иначе - редактирование
      */
     public ProductDialog(Frame parent, Product initial) {
         super(parent, true);
@@ -36,43 +38,33 @@ public class ProductDialog extends JDialog {
                 ? LocaleManager.s("dlg.add.title")
                 : LocaleManager.s("dlg.edit.title");
         setTitle(title);
-        setSize(420, 460);
+        setSize(430, 480);
         setLocationRelativeTo(parent);
-        setResizable(false);
+//        setResizable(false); // Мне так нравится
         buildUI(initial);
     }
 
     private void buildUI(Product initial) {
-        JPanel root = new JPanel(new BorderLayout(8, 8));
-        root.setBorder(BorderFactory.createEmptyBorder(15, 20, 15, 20));
+        JPanel root = new JPanel(new BorderLayout(6, 6));
+        root.setBorder(BorderFactory.createEmptyBorder(16, 20, 12, 20));
 
         JPanel form = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
-        c.insets = new Insets(4, 4, 4, 4);
+        c.insets = new Insets(5, 4, 5, 4);
         c.fill = GridBagConstraints.HORIZONTAL;
         c.weightx = 0; c.gridx = 0;
 
-        // Название
         addRow(form, c, 0, LocaleManager.s("dlg.name"),
                 nameField = new JTextField(16));
-
-        // Координата X
         addRow(form, c, 1, LocaleManager.s("dlg.x"),
                 xField = new JTextField(16));
-
-        // Координата Y
         addRow(form, c, 2, LocaleManager.s("dlg.y"),
                 yField = new JTextField(16));
-
-        // Цена
         addRow(form, c, 3, LocaleManager.s("dlg.price"),
                 priceField = new JTextField(16));
-
-        // Единица измерения
         unitCombo = new JComboBox<>(UnitOfMeasure.values());
         addRow(form, c, 4, LocaleManager.s("dlg.unit"), unitCombo);
 
-        // Владелец
         JSeparator sep = new JSeparator();
         c.gridx = 0; c.gridy = 5; c.gridwidth = 2;
         c.insets = new Insets(8, 0, 4, 0);
@@ -87,7 +79,7 @@ public class ProductDialog extends JDialog {
         addRow(form, c, 8, LocaleManager.s("dlg.owner_weight"),
                 ownerWeightField = new JTextField(16));
 
-        JLabel hint = new JLabel("(рост и вес — только если указан владелец)");
+        JLabel hint = new JLabel(LocaleManager.s("dlg.owner_hint"));
         hint.setForeground(Color.GRAY);
         hint.setFont(hint.getFont().deriveFont(10f));
         c.gridx = 0; c.gridy = 9; c.gridwidth = 2;
@@ -110,15 +102,15 @@ public class ProductDialog extends JDialog {
         }
 
         // Кнопки
-        JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
         JButton ok = new JButton(LocaleManager.s("dlg.ok"));
         JButton cancel = new JButton(LocaleManager.s("dlg.cancel"));
         ok.addActionListener(e -> onOk());
         cancel.addActionListener(e -> dispose());
         getRootPane().setDefaultButton(ok);
-        btnPanel.add(ok);
-        btnPanel.add(cancel);
-        root.add(btnPanel, BorderLayout.SOUTH);
+        buttonPanel.add(ok);
+        buttonPanel.add(cancel);
+        root.add(buttonPanel, BorderLayout.SOUTH);
 
         setContentPane(root);
     }
@@ -133,32 +125,52 @@ public class ProductDialog extends JDialog {
     private void onOk() {
         try {
             String name = nameField.getText().trim();
-            if (name.isEmpty()) throw new IllegalArgumentException("Название не может быть пустым");
+            if (name.isEmpty()) throw new IllegalArgumentException(LocaleManager.s("val.name_empty"));
 
-            double x = Double.parseDouble(xField.getText().trim());
-            float y = Float.parseFloat(yField.getText().trim());
-            if (y <= -93) throw new IllegalArgumentException("Y должно быть больше -93");
-            long price = Long.parseLong(priceField.getText().trim());
-            if (price <= 0) throw new IllegalArgumentException("Цена должна быть > 0");
+            double x = parseDouble(xField.getText().trim());
+            float y = (float) parseDouble(yField.getText().trim());
+            if (y <= -93) throw new IllegalArgumentException(LocaleManager.s("val.y_range"));
+            long price = parseLong(priceField.getText().trim());
+            if (price <= 0) throw new IllegalArgumentException(LocaleManager.s("val.price_pos"));
 
             UnitOfMeasure unit = (UnitOfMeasure) unitCombo.getSelectedItem();
 
             Person owner = null;
             String ownerName = ownerNameField.getText().trim();
             if (!ownerName.isEmpty()) {
-                int height = Integer.parseInt(ownerHeightField.getText().trim());
-                float weight = Float.parseFloat(ownerWeightField.getText().trim());
+                int height = (int) parseLong(ownerHeightField.getText().trim());
+                float weight = (float) parseDouble(ownerWeightField.getText().trim());
                 if (height <= 0 || weight <= 0)
-                    throw new IllegalArgumentException("Рост и вес должны быть > 0");
+                    throw new IllegalArgumentException(LocaleManager.s("val.hw_pos"));
                 owner = new Person(ownerName, height, weight);
             }
 
             result = new Product(name, new Coordinates(x, y), price, unit, owner);
             dispose();
         } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Проверьте числовые поля", "Ошибка", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, LocaleManager.s("val.check_numbers"),
+                    LocaleManager.s("msg.error"), JOptionPane.ERROR_MESSAGE);
         } catch (IllegalArgumentException ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Ошибка", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    LocaleManager.s("msg.error"), JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private double parseDouble(String text) {
+        try {
+            Number number = NumberFormat.getNumberInstance(LocaleManager.get().getCurrentLocale()).parse(text);
+            return number.doubleValue();
+        } catch (ParseException e) {
+            throw new NumberFormatException(text);
+        }
+    }
+
+    private long parseLong(String text) {
+        try {
+            Number number = NumberFormat.getNumberInstance(LocaleManager.get().getCurrentLocale()).parse(text);
+            return number.longValue();
+        } catch (ParseException e) {
+            throw new NumberFormatException(text);
         }
     }
 

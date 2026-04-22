@@ -2,8 +2,11 @@ package server.commands;
 
 import common.forCommunicate.Request;
 import common.forCommunicate.Response;
+import common.data.Product;
 import server.CollectionManager;
 
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -23,14 +26,23 @@ public class Print_field_descending_unit_of_measure implements Command {
 
     @Override
     public Response execute(Request request) {
-        if (cm.getCollection().isEmpty()) {
+        var collection = cm.getCollectionSnapshot();
+        if (collection.isEmpty()) {
             return new Response("Коллекция пуста.", true);
         }
-        String result = cm.getCollection().stream()
-                .sorted((p1, p2) -> p2.getUnitOfMeasure().compareTo(p1.getUnitOfMeasure()))
-                .map(pr -> pr.getName() + ": " + pr.getUnitOfMeasure())
+
+        List<Product> sortedProducts = collection.stream()
+                .sorted(Comparator.comparing(Product::getUnitOfMeasure).reversed())
+                .toList();
+
+        List<String> units = sortedProducts.stream()
+                .map(product -> product.getUnitOfMeasure().name())
+                .toList();
+
+        String result = sortedProducts.stream()
+                .map(product -> product.getName() + ": " + product.getUnitOfMeasure())
                 .collect(Collectors.joining("\n"));
 
-        return new Response(result, true);
+        return new Response(result, true, units);
     }
 }

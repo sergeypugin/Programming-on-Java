@@ -4,15 +4,14 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 /**
- * Менеджер локализации — хранит текущую локаль и предоставляет строки.
- * Переключение происходит без перезапуска.
+ * Singleton-менеджер локализации - хранит текущую локаль и предоставляет строки.
  */
 public class LocaleManager {
     private static LocaleManager instance;
     private Locale currentLocale;
     private ResourceBundle bundle;
 
-    // Доступные локали
+
     public static final Locale[] AVAILABLE_LOCALES = {
             new Locale("ru", "RU"),
             new Locale("pt", "BR"),

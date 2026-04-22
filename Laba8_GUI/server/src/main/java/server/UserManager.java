@@ -3,16 +3,13 @@ package server;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import static common.forCommunicate.HashUtils.hashPassword;
 
 /**
  * Менеджер пользователей для регистрации, аутентификации и хэширования паролей алгоритмом SHA-384
  */
 public class UserManager {
     private static final Logger logger = LogManager.getLogger(UserManager.class);
-    private static final String HASH_ALGORITHM = "SHA-384";
     private final DatabaseManager db;
 
     private static final int MIN_USERNAME_LENGTH = 3;
@@ -22,26 +19,6 @@ public class UserManager {
 
     public UserManager(DatabaseManager db) {
         this.db = db;
-    }
-
-    /**
-     * Хэширует пароль алгоритмом SHA-384 и возвращает hex-строку
-     */
-    public String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance(HASH_ALGORITHM);
-            byte[] hash = md.digest(password.getBytes(StandardCharsets.UTF_8));
-            // SHA-384 генерирует 384 бита хеша, что равно 48 байтам.
-            // Каждый байт - 2 шестнадцатеричных символа,
-            // поэтому hex-строка будет иметь длину 96 символов.
-            StringBuilder sb = new StringBuilder(hash.length * 2);
-            for (byte b : hash) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Алгоритм " + HASH_ALGORITHM + " недоступен", e);
-        }
     }
 
     /**

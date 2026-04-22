@@ -4,8 +4,6 @@ import common.forCommunicate.Request;
 import common.forCommunicate.Response;
 import server.CollectionManager;
 
-import java.util.Collections;
-
 /**
  * Команда для сортировки коллекции в обратном порядке
  */
@@ -18,10 +16,10 @@ public class Reorder implements Command {
 
     @Override
     public Response execute(Request request) {
-        if (collectionManager.getCollection().isEmpty()) {
+        if (collectionManager.isEmpty()) {
             return new Response("Коллекция пуста, нечего сортировать", false);
         }
-        Collections.reverse(collectionManager.getCollection());
+        collectionManager.reorder();
         return new Response("Коллекция успешно отсортирована в обратном порядке", true);
     }
 }

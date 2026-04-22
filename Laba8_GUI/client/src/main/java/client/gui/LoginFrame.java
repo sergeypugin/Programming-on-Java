@@ -5,31 +5,42 @@ import client.network.NetworkClient;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.util.Locale;
+
+import static common.forCommunicate.HashUtils.hashPassword;
 
 /**
- * Окно авторизации/регистрации.
- * Сначала проверяет доступность сервера, ПОТОМ даёт вводить логин/пароль.
+ * Окно авторизации/регистрации.<p>
+ * Сначала проверяет доступность сервера,<p>
+ * Потом даёт вводить логин/пароль.
  */
 public class LoginFrame extends JFrame {
+    // Константы валидации (должны совпадать с UserManager на сервере)
+    private static final int MIN_USERNAME_LENGTH = 3;
+    private static final int MIN_PASSWORD_LENGTH = 6;
 
     private JTextField userField;
     private JPasswordField passField;
-    private JButton loginBtn;
-    private JButton registerBtn;
-    private JComboBox<String> langCombo;
+    private JButton loginButton;
+    private JButton registerButton;
     private JLabel titleLabel;
     private JLabel userLabel;
     private JLabel passLabel;
     private JLabel langLabel;
+    private JLabel hintLabel;
     private JLabel statusLabel;
+
+    /**
+     * true = кнопка loginButton сейчас работает как «Повторить пинг»,
+     * false = кнопка loginButton сейчас работает как «Войти».
+     * Один ActionListener смотрит на этот флаг  никаких add/remove listeners.
+     */
+    private boolean isRetryMode = false;
 
     public LoginFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(400, 320);
+        setSize(400, 370);
         setLocationRelativeTo(null);
-        setResizable(false);
+//        setResizable(false);// Камон, афигенная фича же
         buildUI();
         applyLocale();
         checkServerAndEnable();
@@ -44,14 +55,14 @@ public class LoginFrame extends JFrame {
         titleLabel.setFont(new Font("SansSerif", Font.BOLD, 18));
         root.add(titleLabel, BorderLayout.NORTH);
 
-        // Центр: форма
+        // Форма по центру
         JPanel form = new JPanel(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.insets = new Insets(6, 6, 6, 6);
         c.fill = GridBagConstraints.HORIZONTAL;
 
         userLabel = new JLabel();
-        c.gridx = 0; c.gridy = 0; c.weightx = 0;
+        c.gridx = 0; c.gridy = 0; c.weightx = 0; c.gridwidth = 1;
         form.add(userLabel, c);
         userField = new JTextField(18);
         c.gridx = 1; c.weightx = 1;
@@ -64,14 +75,18 @@ public class LoginFrame extends JFrame {
         c.gridx = 1; c.weightx = 1;
         form.add(passField, c);
 
+        // Подсказка о требованиях к логину/паролю
+        hintLabel = new JLabel();
+        hintLabel.setForeground(Color.GRAY);
+        hintLabel.setFont(hintLabel.getFont().deriveFont(Font.PLAIN, 10f));
+        c.gridx = 0; c.gridy = 2; c.gridwidth = 2; c.insets = new Insets(0, 6, 4, 6);
+        form.add(hintLabel, c);
+        c.gridwidth = 1; c.insets = new Insets(6, 6, 6, 6);
+
         langLabel = new JLabel();
-        c.gridx = 0; c.gridy = 2; c.weightx = 0;
+        c.gridx = 0; c.gridy = 3; c.weightx = 0;
         form.add(langLabel, c);
-        langCombo = new JComboBox<>(LocaleManager.LOCALE_NAMES);
-        langCombo.addActionListener(e -> {
-            LocaleManager.get().setLocale(LocaleManager.AVAILABLE_LOCALES[langCombo.getSelectedIndex()]);
-            applyLocale();
-        });
+        JComboBox<String> langCombo = new JComboBox<>(LocaleManager.LOCALE_NAMES);
         c.gridx = 1; c.weightx = 1;
         form.add(langCombo, c);
 
@@ -80,18 +95,26 @@ public class LoginFrame extends JFrame {
         // Кнопки + статус
         JPanel south = new JPanel(new BorderLayout(5, 5));
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
-        loginBtn = new JButton();
-        registerBtn = new JButton();
-        loginBtn.setEnabled(false);
-        registerBtn.setEnabled(false);
-        loginBtn.addActionListener(this::onLogin);
-        registerBtn.addActionListener(this::onRegister);
-        // Enter = логин
-        getRootPane().setDefaultButton(loginBtn);
-        buttons.add(loginBtn);
-        buttons.add(registerBtn);
+
+        loginButton = new JButton();
+        registerButton = new JButton();
+        loginButton.setEnabled(false);
+        registerButton.setEnabled(false);
+        registerButton.setVisible(false);  // скрыта до успешного пинга
+
+        loginButton.addActionListener(e -> {
+            if (isRetryMode) onRetry();
+            else onLogin();
+        });
+        registerButton.addActionListener(e -> onRegister());
+
+//        getRootPane().setDefaultButton(loginButton);
+
+        buttons.add(loginButton);
+        buttons.add(registerButton);
         south.add(buttons, BorderLayout.CENTER);
 
+        // Многострочный статус через HTML
         statusLabel = new JLabel(" ", SwingConstants.CENTER);
         statusLabel.setForeground(Color.GRAY);
         south.add(statusLabel, BorderLayout.SOUTH);
@@ -106,41 +129,49 @@ public class LoginFrame extends JFrame {
         userLabel.setText(LocaleManager.s("login.user"));
         passLabel.setText(LocaleManager.s("login.pass"));
         langLabel.setText(LocaleManager.s("label.language"));
-        loginBtn.setText(LocaleManager.s("btn.login"));
-        registerBtn.setText(LocaleManager.s("btn.register"));
+        hintLabel.setText(LocaleManager.s("msg.login_hint"));
+        registerButton.setText(LocaleManager.s("button.register"));
+
+        if (isRetryMode) loginButton.setText("↻ " + LocaleManager.s("button.retry"));
+        else loginButton.setText(LocaleManager.s("button.login"));
+    }
+
+    private void setStatus(String text, Color color) {
+        // Экранируем HTML-символы
+        String safe = text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;");
+        statusLabel.setText("<html><div style='text-align:center'>" + safe + "</div></html>");
+        statusLabel.setForeground(color);
     }
 
     /** Проверяем сервер в фоне, чтобы не блокировать EDT */
     private void checkServerAndEnable() {
-        statusLabel.setText(LocaleManager.s("msg.server_check"));
-        statusLabel.setForeground(Color.GRAY);
+        setStatus(LocaleManager.s("msg.server_check"), Color.GRAY);
+        loginButton.setEnabled(false);
+        registerButton.setEnabled(false);
+        registerButton.setVisible(false);
+
         SwingWorker<Boolean, Void> worker = new SwingWorker<>() {
             @Override
             protected Boolean doInBackground() {
                 return NetworkClient.get().isServerAvailable();
             }
+
             @Override
             protected void done() {
                 try {
                     boolean ok = get();
                     if (ok) {
-                        statusLabel.setText("✓ Сервер доступен");
-                        statusLabel.setForeground(new Color(0, 140, 0));
-                        loginBtn.setEnabled(true);
-                        registerBtn.setEnabled(true);
+                        isRetryMode = false;
+                        setStatus(LocaleManager.s("msg.server_ok"), new Color(0, 140, 0));
+                        loginButton.setText(LocaleManager.s("button.login"));
+                        loginButton.setEnabled(true);
+                        registerButton.setEnabled(true);
+                        registerButton.setVisible(true);
                     } else {
-                        statusLabel.setText(LocaleManager.s("msg.server_down"));
-                        statusLabel.setForeground(Color.RED);
-                        // Retry button
-                        loginBtn.setText("↻ Повторить");
-                        loginBtn.setEnabled(true);
-                        loginBtn.removeActionListener(loginBtn.getActionListeners()[0]);
-                        loginBtn.addActionListener(e -> {
-                            loginBtn.setEnabled(false);
-                            loginBtn.setText(LocaleManager.s("btn.login"));
-                            loginBtn.addActionListener(LoginFrame.this::onLogin);
-                            checkServerAndEnable();
-                        });
+                        isRetryMode = true;
+                        setStatus(LocaleManager.s("msg.server_down"), Color.RED);
+                        loginButton.setText("↻ " + LocaleManager.s("button.retry"));
+                        loginButton.setEnabled(true);
                     }
                 } catch (Exception ignored) {}
             }
@@ -148,87 +179,114 @@ public class LoginFrame extends JFrame {
         worker.execute();
     }
 
-    private void onLogin(ActionEvent e) {
+    /** Нажали «Повторить» */
+    private void onRetry() {
+        isRetryMode = false;
+        loginButton.setEnabled(false);
+        checkServerAndEnable();
+    }
+
+    private void onLogin() {
         String user = userField.getText().trim();
         String pass = new String(passField.getPassword());
+
         if (user.isEmpty() || pass.isEmpty()) {
-            statusLabel.setText("Введите логин и пароль");
-            statusLabel.setForeground(Color.RED);
+            setStatus(LocaleManager.s("msg.fill_fields"), Color.RED);
             return;
         }
-        loginBtn.setEnabled(false);
-        registerBtn.setEnabled(false);
+        if (user.length() < MIN_USERNAME_LENGTH) {
+            setStatus(LocaleManager.s("msg.login_short"), Color.RED);
+            return;
+        }
+        if (pass.length() < MIN_PASSWORD_LENGTH) {
+            setStatus(LocaleManager.s("msg.pass_short"), Color.RED);
+            return;
+        }
+        loginButton.setEnabled(false);
+        registerButton.setEnabled(false);
+        setStatus(LocaleManager.s("msg.server_check"), Color.GRAY);
+
         SwingWorker<Boolean, Void> worker = new SwingWorker<>() {
             private String msg;
+
             @Override
             protected Boolean doInBackground() {
                 var resp = NetworkClient.get().sendAuth("login", user, pass);
                 msg = resp.getMessage();
                 return resp.isSuccess();
             }
+
             @Override
             protected void done() {
                 try {
                     if (get()) {
                         NetworkClient.get().setCurrentUser(user);
+                        NetworkClient.get().setUserPassword(pass);
                         openMain();
                     } else {
-                        statusLabel.setText(msg);
-                        statusLabel.setForeground(Color.RED);
-                        loginBtn.setEnabled(true);
-                        registerBtn.setEnabled(true);
+                        setStatus(msg, Color.RED);
+                        loginButton.setEnabled(true);
+                        registerButton.setEnabled(true);
                     }
                 } catch (Exception ex) {
-                    statusLabel.setText(LocaleManager.s("msg.server_down"));
-                    statusLabel.setForeground(Color.RED);
-                    loginBtn.setEnabled(true);
-                    registerBtn.setEnabled(true);
+                    setStatus(LocaleManager.s("msg.server_down"), Color.RED);
+                    loginButton.setEnabled(true);
+                    registerButton.setEnabled(true);
                 }
             }
         };
         worker.execute();
     }
 
-    private void onRegister(ActionEvent e) {
+    private void onRegister() {
         String user = userField.getText().trim();
         String pass = new String(passField.getPassword());
+
         if (user.isEmpty() || pass.isEmpty()) {
-            statusLabel.setText("Введите логин и пароль");
-            statusLabel.setForeground(Color.RED);
+            setStatus(LocaleManager.s("msg.fill_fields"), Color.RED);
             return;
         }
-        loginBtn.setEnabled(false);
-        registerBtn.setEnabled(false);
+        if (user.length() < MIN_USERNAME_LENGTH) {
+            setStatus(LocaleManager.s("msg.login_short"), Color.RED);
+            return;
+        }
+        if (pass.length() < MIN_PASSWORD_LENGTH) {
+            setStatus(LocaleManager.s("msg.pass_short"), Color.RED);
+            return;
+        }
+
+        loginButton.setEnabled(false);
+        registerButton.setEnabled(false);
+        setStatus(LocaleManager.s("msg.server_check"), Color.GRAY);
+
         SwingWorker<String, Void> worker = new SwingWorker<>() {
             private boolean ok;
+
             @Override
             protected String doInBackground() {
-                var resp = NetworkClient.get().sendAuth("register", user, pass);
+                String hashedPass = hashPassword(pass);
+                var resp = NetworkClient.get().sendAuth("register", user, hashedPass);
                 ok = resp.isSuccess();
                 return resp.getMessage();
             }
+
             @Override
             protected void done() {
                 try {
                     String msg = get();
                     if (ok) {
-                        statusLabel.setText(msg);
-                        statusLabel.setForeground(new Color(0, 140, 0));
-                        try (java.io.FileWriter writer = new java.io.FileWriter("my_accounts.txt", true)) {
-                            writer.write("Логин: " + user + " | Пароль: " + pass + "\n"); writer.flush();
-                        } catch (java.io.IOException ex) {
-                            System.err.println("Не удалось сохранить аккаунт в файл"); System.err.flush();
-                        }
+                        NetworkClient.get().setCurrentUser(user);
+                        NetworkClient.get().setUserPassword(pass);
+                        setStatus(msg, new Color(0, 140, 0));
+                        openMain();
                     } else {
-                        statusLabel.setText(msg);
-                        statusLabel.setForeground(Color.RED);
+                        setStatus(msg, Color.RED);
                     }
                 } catch (Exception ex) {
-                    statusLabel.setText(LocaleManager.s("msg.server_down"));
-                    statusLabel.setForeground(Color.RED);
+                    setStatus(LocaleManager.s("msg.server_down"), Color.RED);
                 }
-                loginBtn.setEnabled(true);
-                registerBtn.setEnabled(true);
+                loginButton.setEnabled(true);
+                registerButton.setEnabled(true);
             }
         };
         worker.execute();

@@ -4,97 +4,97 @@ import client.locale.LocaleManager;
 import client.network.NetworkClient;
 import common.data.Product;
 import common.data.UnitOfMeasure;
+import common.forCommunicate.CollectionInfo;
 import common.forCommunicate.Response;
+import common.forCommunicate.ShowData;
 
 import javax.swing.*;
-import javax.swing.Timer;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.*;
+import java.util.Locale;
+import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * Главное окно приложения.
- * Содержит шапку с юзером/языком, таблицу с фильтром,
- * панель визуализации и панель кнопок для всех команд.
  */
 public class MainFrame extends JFrame {
-
-    // --- Модель таблицы ---
     private static final String[] COL_KEYS = {
-        "col.id","col.name","col.x","col.y","col.date",
-        "col.price","col.unit","col.owner","col.created_by"
+            "col.id", "col.name", "col.x", "col.y", "col.date",
+            "col.price", "col.unit", "col.owner", "col.created_by"
     };
+
     private final DefaultTableModel tableModel = new DefaultTableModel(new Object[0][0], new String[0]) {
-        @Override public boolean isCellEditable(int r, int c) { return false; }
+        @Override
+        public boolean isCellEditable(int r, int c) {
+            return false;
+        }
     };
-    private final TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tableModel);
 
     private JTable table;
+    private JTabbedPane tabs;
     private VisualizationPanel visPanel;
 
-    // Шапка
     private JLabel curUserLabel;
     private JLabel langLabel;
+    private JLabel syncStatusLabel;
     private JComboBox<String> langCombo;
 
-    // Фильтр
     private JTextField filterField;
     private JComboBox<String> filterColCombo;
     private JLabel filterLabel;
+    private JLabel sortLabel;
+    private JComboBox<String> sortColCombo;
+    private JCheckBox sortDescBox;
 
-    // Кнопки команд
-    private Map<String, JButton> buttons = new LinkedHashMap<>();
+    private final java.util.Map<String, JButton> buttons = new java.util.LinkedHashMap<>();
 
-    // Авторефреш
     private Timer refreshTimer;
-    // Храним список продуктов
     private List<Product> currentProducts = Collections.emptyList();
+    private List<Product> displayedProducts = Collections.emptyList();
+    private int sortColumnIndex = 0;
+    private boolean sortDescending = false;
+    private boolean showRefreshErrors = false;
 
     public MainFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1100, 700);
+        setSize(1180, 760);
         setLocationRelativeTo(null);
         buildUI();
         applyLocale();
         refreshCollection();
-        // Авто-обновление каждые 5 секунд
         refreshTimer = new Timer(5000, e -> refreshCollection());
         refreshTimer.start();
     }
 
-    // -------------------------------------------------------
-    //  Построение UI
-    // -------------------------------------------------------
     private void buildUI() {
         setLayout(new BorderLayout(5, 5));
+        add(buildHeader(), BorderLayout.NORTH);
 
-        // ── Шапка ──
-        JPanel header = buildHeader();
-        add(header, BorderLayout.NORTH);
-
-        // ── Центр: вкладки таблица / визуализация ──
-        JTabbedPane tabs = new JTabbedPane();
-
-        // Вкладка таблицы
+        tabs = new JTabbedPane();
         JPanel tableTab = buildTableTab();
-        tabs.addTab(LocaleManager.s("tab.table"), tableTab);
+        tabs.addTab("", tableTab);
 
-        // Вкладка визуализации
         visPanel = new VisualizationPanel();
-        visPanel.setOnProductClick(p -> VisualizationPanel.showProductInfo(this, p));
+        visPanel.setOnProductClick(this::onVisualProductClick);
         JScrollPane visSP = new JScrollPane(visPanel);
-        tabs.addTab(LocaleManager.s("tab.visual"), visSP);
-
+        tabs.addTab("", visSP);
         add(tabs, BorderLayout.CENTER);
 
-        // ── Боковая панель команд ──
-        JPanel commandPanel = buildCommandPanel();
-        add(commandPanel, BorderLayout.EAST);
+        add(buildCommandPanel(), BorderLayout.EAST);
+        add(buildStatusPanel(), BorderLayout.SOUTH);
     }
 
     private JPanel buildHeader() {
@@ -103,16 +103,13 @@ public class MainFrame extends JFrame {
                 BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),
                 BorderFactory.createEmptyBorder(6, 12, 6, 12)));
 
-        // Левая часть: текущий пользователь
         curUserLabel = new JLabel();
         curUserLabel.setFont(curUserLabel.getFont().deriveFont(Font.BOLD));
         p.add(curUserLabel, BorderLayout.WEST);
 
-        // Правая часть: язык + выход
         JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
         langLabel = new JLabel();
         langCombo = new JComboBox<>(LocaleManager.LOCALE_NAMES);
-        // Установить текущую локаль
         for (int i = 0; i < LocaleManager.AVAILABLE_LOCALES.length; i++) {
             if (LocaleManager.AVAILABLE_LOCALES[i].equals(LocaleManager.get().getCurrentLocale())) {
                 langCombo.setSelectedIndex(i);
@@ -123,12 +120,13 @@ public class MainFrame extends JFrame {
             LocaleManager.get().setLocale(LocaleManager.AVAILABLE_LOCALES[langCombo.getSelectedIndex()]);
             applyLocale();
         });
-        JButton logoutBtn = new JButton(LocaleManager.s("btn.logout"));
-        logoutBtn.addActionListener(e -> logout());
+
+        JButton logoutbutton = new JButton();
+        logoutbutton.addActionListener(e -> logout());
         right.add(langLabel);
         right.add(langCombo);
-        right.add(logoutBtn);
-        buttons.put("logout", logoutBtn);
+        right.add(logoutbutton);
+        buttons.put("logout", logoutbutton);
         p.add(right, BorderLayout.EAST);
         return p;
     }
@@ -137,34 +135,70 @@ public class MainFrame extends JFrame {
         JPanel panel = new JPanel(new BorderLayout(5, 5));
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-        // Строка фильтра
-        JPanel filterRow = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
-        filterLabel = new JLabel(LocaleManager.s("filter.label"));
-        filterField = new JTextField(20);
+        JPanel controls = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
+        filterLabel = new JLabel();
+        filterField = new JTextField(16);
         filterColCombo = new JComboBox<>();
-        for (String key : COL_KEYS) filterColCombo.addItem(LocaleManager.s(key));
-        filterField.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-            public void insertUpdate(javax.swing.event.DocumentEvent e) { applyFilter(); }
-            public void removeUpdate(javax.swing.event.DocumentEvent e) { applyFilter(); }
-            public void changedUpdate(javax.swing.event.DocumentEvent e) { applyFilter(); }
-        });
-        filterColCombo.addActionListener(e -> applyFilter());
-        filterRow.add(filterLabel);
-        filterRow.add(filterField);
-        filterRow.add(filterColCombo);
-        panel.add(filterRow, BorderLayout.NORTH);
+        sortLabel = new JLabel();
+        sortColCombo = new JComboBox<>();
+        sortDescBox = new JCheckBox();
 
-        // Таблица
+        IntStream.range(0, COL_KEYS.length).forEach(i -> {
+            filterColCombo.addItem("");
+            sortColCombo.addItem("");
+        });
+
+        filterField.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            public void insertUpdate(javax.swing.event.DocumentEvent e) { applyTableView(); }
+            public void removeUpdate(javax.swing.event.DocumentEvent e) { applyTableView(); }
+            public void changedUpdate(javax.swing.event.DocumentEvent e) { applyTableView(); }
+        });
+        filterColCombo.addActionListener(e -> applyTableView());
+        sortColCombo.addActionListener(e -> {
+            sortColumnIndex = Math.max(0, sortColCombo.getSelectedIndex());
+            applyTableView();
+        });
+        sortDescBox.addActionListener(e -> {
+            sortDescending = sortDescBox.isSelected();
+            applyTableView();
+        });
+
+        controls.add(filterLabel);
+        controls.add(filterField);
+        controls.add(filterColCombo);
+        controls.add(sortLabel);
+        controls.add(sortColCombo);
+        controls.add(sortDescBox);
+        panel.add(controls, BorderLayout.NORTH);
+
         rebuildTableColumns();
         table = new JTable(tableModel);
-        table.setRowSorter(sorter);
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         table.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         table.getTableHeader().setReorderingAllowed(false);
-        // Двойной клик — редактирование
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
-            @Override public void mouseClicked(java.awt.event.MouseEvent e) {
-                if (e.getClickCount() == 2) onUpdate(null);
+        table.getTableHeader().addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int col = table.columnAtPoint(e.getPoint());
+                if (col < 0) {
+                    return;
+                }
+                if (sortColumnIndex == col) {
+                    sortDescending = !sortDescending;
+                } else {
+                    sortColumnIndex = col;
+                }
+                sortColCombo.setSelectedIndex(sortColumnIndex);
+                sortDescBox.setSelected(sortDescending);
+                applyTableView();
+            }
+        });
+        table.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    onUpdate();
+                }
             }
         });
         panel.add(new JScrollPane(table), BorderLayout.CENTER);
@@ -177,69 +211,86 @@ public class MainFrame extends JFrame {
         panel.setBorder(BorderFactory.createCompoundBorder(
                 BorderFactory.createMatteBorder(0, 1, 0, 0, Color.LIGHT_GRAY),
                 BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-        panel.setPreferredSize(new Dimension(185, 0));
+        panel.setPreferredSize(new Dimension(195, 0));
 
         String[][] cmds = {
-            {"btn.refresh",     "refresh"},
-            {"btn.add",         "add"},
-            {"btn.update",      "update"},
-            {"btn.delete",      "delete"},
-            {"btn.clear",       "clear"},
-            {"btn.info",        "info"},
-            {"btn.reorder",     "reorder"},
-            {"btn.remove_last", "remove_last"},
-            {"btn.remove_at",   "remove_at"},
-            {"btn.filter_owner","filter_owner"},
-            {"btn.count_unit",  "count_unit"},
-            {"btn.print_desc",  "print_desc"},
+                {"button.refresh", "refresh"},
+                {"button.help", "help"},
+                {"button.add", "add"},
+                {"button.update", "update"},
+                {"button.delete", "delete"},
+                {"button.clear", "clear"},
+                {"button.info", "info"},
+                {"button.reorder", "reorder"},
+                {"button.remove_last", "remove_last"},
+                {"button.remove_at", "remove_at"},
+                {"button.filter_owner", "filter_owner"},
+                {"button.count_unit", "count_unit"},
+                {"button.print_desc", "print_desc"},
         };
         for (String[] cmd : cmds) {
-            JButton btn = new JButton(LocaleManager.s(cmd[0]));
-            btn.setAlignmentX(Component.CENTER_ALIGNMENT);
-            btn.setMaximumSize(new Dimension(165, 30));
-            btn.setActionCommand(cmd[1]);
-            btn.addActionListener(this::handleCommand);
-            buttons.put(cmd[1], btn);
-            panel.add(btn);
+            JButton button = new JButton();
+            button.setAlignmentX(Component.CENTER_ALIGNMENT);
+            button.setMaximumSize(new Dimension(170, 30));
+            button.setActionCommand(cmd[1]);
+            button.addActionListener(this::handleCommand);
+            buttons.put(cmd[1], button);
+            panel.add(button);
             panel.add(Box.createRigidArea(new Dimension(0, 5)));
         }
         return panel;
     }
 
-    // -------------------------------------------------------
-    //  Локализация (вызывается при смене языка)
-    // -------------------------------------------------------
+    private JPanel buildStatusPanel() {
+        JPanel panel = new JPanel(new BorderLayout());
+        panel.setBorder(BorderFactory.createCompoundBorder(
+                BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY),
+                BorderFactory.createEmptyBorder(4, 12, 4, 12)));
+        syncStatusLabel = new JLabel();
+        panel.add(syncStatusLabel, BorderLayout.WEST);
+        return panel;
+    }
+
     private void applyLocale() {
         setTitle(LocaleManager.s("app.title"));
         curUserLabel.setText(LocaleManager.s("label.cur_user") + NetworkClient.get().getCurrentUser());
         langLabel.setText(LocaleManager.s("label.language"));
 
-        // Кнопки
-        String[][] keys = {
-            {"refresh","btn.refresh"},{"add","btn.add"},{"update","btn.update"},
-            {"delete","btn.delete"},{"clear","btn.clear"},{"info","btn.info"},
-            {"reorder","btn.reorder"},{"remove_last","btn.remove_last"},
-            {"remove_at","btn.remove_at"},{"filter_owner","btn.filter_owner"},
-            {"count_unit","btn.count_unit"},{"print_desc","btn.print_desc"},
-            {"logout","btn.logout"},
-        };
-        for (String[] kv : keys) {
-            JButton b = buttons.get(kv[0]);
-            if (b != null) b.setText(LocaleManager.s(kv[1]));
+        setButtonText("refresh", "button.refresh");
+        setButtonText("help", "button.help");
+        setButtonText("add", "button.add");
+        setButtonText("update", "button.update");
+        setButtonText("delete", "button.delete");
+        setButtonText("clear", "button.clear");
+        setButtonText("info", "button.info");
+        setButtonText("reorder", "button.reorder");
+        setButtonText("remove_last", "button.remove_last");
+        setButtonText("remove_at", "button.remove_at");
+        setButtonText("filter_owner", "button.filter_owner");
+        setButtonText("count_unit", "button.count_unit");
+        setButtonText("print_desc", "button.print_desc");
+        setButtonText("logout", "button.logout");
+
+        filterLabel.setText(LocaleManager.s("filter.label"));
+        sortLabel.setText(LocaleManager.s("sort.label"));
+        sortDescBox.setText(LocaleManager.s("sort.desc"));
+
+        if (tabs != null) {
+            tabs.setTitleAt(0, LocaleManager.s("tab.table"));
+            tabs.setTitleAt(1, LocaleManager.s("tab.visual"));
         }
 
-        // Перестроить колонки
         rebuildTableColumns();
-        // Обновить combo фильтра
-        if (filterColCombo != null) {
-            filterColCombo.removeAllItems();
-            for (String key : COL_KEYS) filterColCombo.addItem(LocaleManager.s(key));
-        }
-        if (filterLabel != null) filterLabel.setText(LocaleManager.s("filter.label"));
+        rebuildColumnCombos();
+        applyTableView();
+        visPanel.repaint();
+    }
 
-        // Перезаполнить таблицу с новыми форматами
-        populateTable(currentProducts);
-        repaint();
+    private void setButtonText(String id, String key) {
+        JButton button = buttons.get(id);
+        if (button != null) {
+            button.setText(LocaleManager.s(key));
+        }
     }
 
     private void rebuildTableColumns() {
@@ -249,24 +300,135 @@ public class MainFrame extends JFrame {
         tableModel.setColumnIdentifiers(headers);
     }
 
-    // -------------------------------------------------------
-    //  Обновление данных
-    // -------------------------------------------------------
+    private void rebuildColumnCombos() {
+        int selectedFilter = Math.max(0, filterColCombo.getSelectedIndex());
+        int selectedSort = Math.max(0, sortColCombo.getSelectedIndex());
+        filterColCombo.removeAllItems();
+        sortColCombo.removeAllItems();
+        for (String key : COL_KEYS) {
+            String label = LocaleManager.s(key);
+            filterColCombo.addItem(label);
+            sortColCombo.addItem(label);
+        }
+        filterColCombo.setSelectedIndex(Math.min(selectedFilter, COL_KEYS.length - 1));
+        sortColCombo.setSelectedIndex(Math.min(selectedSort, COL_KEYS.length - 1));
+    }
+
     void refreshCollection() {
-        SwingWorker<List<Product>, Void> w = new SwingWorker<>() {
-            @Override protected List<Product> doInBackground() {
-                return NetworkClient.get().fetchCollection();
+        SwingWorker<Response, Void> worker = new SwingWorker<>() {
+            @Override
+            protected Response doInBackground() {
+                return NetworkClient.get().fetchCollectionResponse();
             }
-            @Override protected void done() {
+
+            @Override
+            protected void done() {
                 try {
-                    List<Product> list = get();
+                    Response response = get();
+                    if (response == null) {
+                        onRefreshFailed();
+                        return;
+                    }
+                    List<Product> list = extractProducts(response);
                     currentProducts = list;
-                    populateTable(list);
+                    applyTableView();
                     visPanel.setProducts(list);
-                } catch (Exception ignored) {}
+                    syncStatusLabel.setText(LocaleManager.s("status.synced"));
+                    showRefreshErrors = true;
+                } catch (Exception ex) {
+                    onRefreshFailed();
+                }
             }
         };
-        w.execute();
+        worker.execute();
+    }
+
+    private void onRefreshFailed() {
+        syncStatusLabel.setText(LocaleManager.s("status.sync_failed"));
+        if (showRefreshErrors) {
+            showError(LocaleManager.s("msg.server_down"));
+            showRefreshErrors = false;
+        }
+    }
+
+    private List<Product> extractProducts(Response response) {
+        Object data = response.getData();
+        if (data instanceof ShowData showData) {
+            return new ArrayList<>(showData.getProducts());
+        }
+        return Collections.emptyList();
+    }
+
+    private void applyTableView() {
+        if (filterField == null || filterColCombo == null || sortColCombo == null) {
+            return;
+        }
+        String text = filterField.getText().trim().toLowerCase(Locale.ROOT);
+        int filterColumn = Math.max(0, filterColCombo.getSelectedIndex());
+        sortColumnIndex = Math.max(0, sortColCombo.getSelectedIndex());
+        sortDescending = sortDescBox.isSelected();
+
+        Stream<Product> stream = currentProducts.stream();
+        if (!text.isEmpty()) {
+            stream = stream.filter(product -> valueForColumn(product, filterColumn)
+                    .toLowerCase(Locale.ROOT)
+                    .contains(text));
+        }
+
+        Comparator<Product> comparator = Comparator.comparing(
+                product -> sortComparableValue(product, sortColumnIndex),
+                MainFrame::compareValues
+        );
+        if (sortDescending) {
+            comparator = comparator.reversed();
+        }
+
+        displayedProducts = stream.sorted(comparator).collect(Collectors.toList());
+        populateTable(displayedProducts);
+    }
+
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private static int compareValues(Comparable left, Comparable right) {
+        if (left == right) {
+            return 0;
+        }
+        if (left == null) {
+            return -1;
+        }
+        if (right == null) {
+            return 1;
+        }
+        return left.compareTo(right);
+    }
+
+    private Comparable<?> sortComparableValue(Product product, int column) {
+        return switch (column) {
+            case 0 -> product.getId();
+            case 1 -> product.getName();
+            case 2 -> product.getCoordinates().getX();
+            case 3 -> product.getCoordinates().getY();
+            case 4 -> product.getCreationDate();
+            case 5 -> product.getPrice();
+            case 6 -> product.getUnitOfMeasure() != null ? product.getUnitOfMeasure().name() : "";
+            case 7 -> product.getOwner() != null ? product.getOwner().getName() : "";
+            case 8 -> product.getCreatorUsername() != null ? product.getCreatorUsername() : "";
+            default -> product.getId();
+        };
+    }
+
+    private String valueForColumn(Product product, int column) {
+        return switch (column) {
+            case 0 -> String.valueOf(product.getId());
+            case 1 -> product.getName();
+            case 2 -> String.valueOf(product.getCoordinates().getX());
+            case 3 -> String.valueOf(product.getCoordinates().getY());
+            case 4 -> String.valueOf(product.getCreationDate().getTime());
+            case 5 -> String.valueOf(product.getPrice());
+            case 6 -> product.getUnitOfMeasure() != null ? product.getUnitOfMeasure().name() : "";
+            case 7 -> product.getOwner() != null ? product.getOwner().getName() : "";
+            case 8 -> product.getCreatorUsername() != null ? product.getCreatorUsername() : "";
+            default -> "";
+        };
     }
 
     private void populateTable(List<Product> products) {
@@ -277,167 +439,276 @@ public class MainFrame extends JFrame {
         for (Product p : products) {
             String owner = p.getOwner() != null ? p.getOwner().getName() : "—";
             tableModel.addRow(new Object[]{
-                p.getId(),
-                p.getName(),
-                nf.format(p.getCoordinates().getX()),
-                nf.format(p.getCoordinates().getY()),
-                df.format(p.getCreationDate()),
-                nf.format(p.getPrice()),
-                p.getUnitOfMeasure(),
-                owner,
-                p.getCreatorUsername() != null ? p.getCreatorUsername() : "—"
+                    p.getId(),
+                    p.getName(),
+                    nf.format(p.getCoordinates().getX()),
+                    nf.format(p.getCoordinates().getY()),
+                    df.format(p.getCreationDate()),
+                    nf.format(p.getPrice()),
+                    p.getUnitOfMeasure(),
+                    owner,
+                    p.getCreatorUsername() != null ? p.getCreatorUsername() : "—"
             });
         }
-        applyFilter();
     }
 
-    private void applyFilter() {
-        String text = filterField.getText().trim();
-        int colIdx = filterColCombo != null ? filterColCombo.getSelectedIndex() : -1;
-        if (text.isEmpty()) {
-            sorter.setRowFilter(null);
-        } else {
-            String regex = "(?i)" + java.util.regex.Pattern.quote(text);
-            if (colIdx >= 0) sorter.setRowFilter(RowFilter.regexFilter(regex, colIdx));
-            else sorter.setRowFilter(RowFilter.regexFilter(regex));
-        }
-    }
-
-    private int[] getColumnIndices() {
-        int n = tableModel.getColumnCount();
-        int[] arr = new int[n];
-        for (int i = 0; i < n; i++) arr[i] = i;
-        return arr;
-    }
-
-    // -------------------------------------------------------
-    //  Вспомогательное: получить выбранный продукт
-    // -------------------------------------------------------
     private Product getSelectedProduct() {
-        int viewRow = table.getSelectedRow();
-        if (viewRow < 0) return null;
-        int modelRow = table.convertRowIndexToModel(viewRow);
-        long id = (long) tableModel.getValueAt(modelRow, 0);
-        return currentProducts.stream().filter(p -> p.getId() == id).findFirst().orElse(null);
+        int row = table.getSelectedRow();
+        if (row < 0 || row >= displayedProducts.size()) {
+            return null;
+        }
+        return displayedProducts.get(row);
     }
 
-    // -------------------------------------------------------
-    //  Обработчик кнопок
-    // -------------------------------------------------------
     private void handleCommand(ActionEvent e) {
         String cmd = e.getActionCommand();
         switch (cmd) {
             case "refresh" -> refreshCollection();
-            case "add" -> onAdd(e);
-            case "update" -> onUpdate(e);
-            case "delete" -> onDelete(e);
-            case "clear" -> onClear(e);
-            case "info" -> onInfo(e);
-            case "reorder" -> sendSimple("reorder", "");
-            case "remove_last" -> sendSimple("remove_last", "");
-            case "remove_at" -> onRemoveAt(e);
-            case "filter_owner" -> onFilterOwner(e);
-            case "count_unit" -> onCountUnit(e);
-            case "print_desc" -> sendSimple("print_field_descending_unit_of_measure", "");
+            case "help" -> onHelp();
+            case "add" -> onAdd();
+            case "update" -> onUpdate();
+            case "delete" -> onDelete();
+            case "clear" -> onClear();
+            case "info" -> onInfo();
+            case "reorder" -> sendSimple("reorder");
+            case "remove_last" -> sendSimple("remove_last");
+            case "remove_at" -> onRemoveAt();
+            case "filter_owner" -> onFilterOwner();
+            case "count_unit" -> onCountUnit();
+            case "print_desc" -> onPrintDescending();
         }
     }
 
-    private void onAdd(ActionEvent e) {
-        ProductDialog dlg = new ProductDialog(this, null);
-        dlg.setVisible(true);
-        Product p = dlg.getResult();
-        if (p == null) return;
-        exeCommand(() -> NetworkClient.get().send("add", "", p));
+    private void onHelp() {
+        showInfo(buildHelpText());
     }
 
-    private void onUpdate(ActionEvent e) {
+    private void onAdd() {
+        ProductDialog dlg = new ProductDialog(this, null);
+        dlg.setVisible(true);
+        Product product = dlg.getResult();
+        if (product == null) {
+            return;
+        }
+        exeCommand(() -> NetworkClient.get().send("add", "", product), Response::getMessage);
+    }
+
+    private void onUpdate() {
         Product sel = getSelectedProduct();
-        if (sel == null) { showInfo(LocaleManager.s("msg.no_sel")); return; }
+        if (sel == null) {
+            showInfo(LocaleManager.s("msg.no_sel"));
+            return;
+        }
         if (!Objects.equals(sel.getCreatorUsername(), NetworkClient.get().getCurrentUser())) {
-            showError(LocaleManager.s("msg.not_owner")); return;
+            showError(LocaleManager.s("msg.not_owner"));
+            return;
         }
         ProductDialog dlg = new ProductDialog(this, sel);
         dlg.setVisible(true);
-        Product p = dlg.getResult();
-        if (p == null) return;
-        exeCommand(() -> NetworkClient.get().send("update", String.valueOf(sel.getId()), p));
+        Product product = dlg.getResult();
+        if (product == null) {
+            return;
+        }
+        exeCommand(() -> NetworkClient.get().send("update", String.valueOf(sel.getId()), product), Response::getMessage);
     }
 
-    private void onDelete(ActionEvent e) {
+    private void onDelete() {
         Product sel = getSelectedProduct();
-        if (sel == null) { showInfo(LocaleManager.s("msg.no_sel")); return; }
+        if (sel == null) {
+            showInfo(LocaleManager.s("msg.no_sel"));
+            return;
+        }
+        onDeleteProduct(sel);
+    }
+
+    private void onDeleteProduct(Product product) {
         int confirm = JOptionPane.showConfirmDialog(this,
                 LocaleManager.s("msg.confirm_del"), LocaleManager.s("msg.error"),
                 JOptionPane.YES_NO_OPTION);
-        if (confirm != JOptionPane.YES_OPTION) return;
-        exeCommand(() -> NetworkClient.get().send("remove_by_id", String.valueOf(sel.getId()), null));
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+        exeCommand(() -> NetworkClient.get().send("remove_by_id", String.valueOf(product.getId()), null), Response::getMessage);
     }
 
-    private void onClear(ActionEvent e) {
+    private void onClear() {
         int confirm = JOptionPane.showConfirmDialog(this,
-                "Удалить все СВОИ объекты из коллекции?", LocaleManager.s("msg.error"),
+                LocaleManager.s("msg.confirm_clear"), LocaleManager.s("msg.error"),
                 JOptionPane.YES_NO_OPTION);
-        if (confirm != JOptionPane.YES_OPTION) return;
-        exeCommand(() -> NetworkClient.get().send("clear", "", null));
+        if (confirm != JOptionPane.YES_OPTION) {
+            return;
+        }
+        exeCommand(() -> NetworkClient.get().send("clear", "", null), Response::getMessage);
     }
 
-    private void onInfo(ActionEvent e) {
-        exeCommand(() -> NetworkClient.get().send("info", "", null));
+    private void onInfo() {
+        exeCommand(() -> NetworkClient.get().send("info", "", null), this::formatInfoResponse);
     }
 
-    private void onRemoveAt(ActionEvent e) {
+    private String formatInfoResponse(Response response) {
+        if (response.getData() instanceof CollectionInfo info) {
+            DateFormat dateFormat = DateFormat.getDateTimeInstance(
+                    DateFormat.MEDIUM, DateFormat.SHORT, LocaleManager.get().getCurrentLocale()
+            );
+            NumberFormat numberFormat = NumberFormat.getIntegerInstance(LocaleManager.get().getCurrentLocale());
+            return LocaleManager.s("info.template")
+                    .replace("{type}", info.getCollectionType())
+                    .replace("{date}", dateFormat.format(info.getCreationDate()))
+                    .replace("{size}", numberFormat.format(info.getSize()));
+        }
+        return response.getMessage();
+    }
+
+    private void onRemoveAt() {
         String input = JOptionPane.showInputDialog(this, LocaleManager.s("dlg.idx_prompt"));
-        if (input == null || input.isBlank()) return;
-        exeCommand(() -> NetworkClient.get().send("remove_at", input.trim(), null));
+        if (input == null || input.isBlank()) {
+            return;
+        }
+        exeCommand(() -> NetworkClient.get().send("remove_at", input.trim(), null), Response::getMessage);
     }
 
-    private void onFilterOwner(ActionEvent e) {
+    private void onFilterOwner() {
         String input = JOptionPane.showInputDialog(this, LocaleManager.s("dlg.owner_prompt"));
-        if (input == null || input.isBlank()) return;
-        // Фильтруем через Streams API на клиенте
+        if (input == null || input.isBlank()) {
+            return;
+        }
         String ownerName = input.trim();
-        List<Product> filtered = currentProducts.stream()
-                .filter(p -> p.getOwner() != null &&
-                        p.getOwner().getName().equalsIgnoreCase(ownerName))
-                .collect(Collectors.toList());
-        populateTable(filtered);
-        showInfo("Найдено: " + filtered.size() + " объектов с владельцем «" + ownerName + "»");
+        exeCommand(
+                () -> NetworkClient.get().send("filter_by_owner", ownerName, null),
+                response -> formatFilterOwnerResponse(ownerName, response)
+        );
     }
 
-    // ── Count by unit ──
-    private void onCountUnit(ActionEvent e) {
-        String[] options = Arrays.stream(UnitOfMeasure.values())
-                .map(Enum::name).toArray(String[]::new);
-        String chosen = (String) JOptionPane.showInputDialog(this,
-                LocaleManager.s("dlg.unit_prompt"), LocaleManager.s("btn.count_unit"),
-                JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
-        if (chosen == null) return;
-        exeCommand(() -> NetworkClient.get().send("count_by_unit_of_measure", chosen, null));
+    @SuppressWarnings("unchecked")
+    private String formatFilterOwnerResponse(String ownerName, Response response) {
+        List<Product> filtered = response.getData() instanceof List<?> list
+                ? (List<Product>) list
+                : Collections.emptyList();
+        if (filtered.isEmpty()) {
+            return LocaleManager.s("msg.owner_not_found").replace("{owner}", ownerName);
+        }
+        return LocaleManager.s("msg.filter_found")
+                .replace("{owner}", ownerName)
+                .replace("{count}", NumberFormat.getIntegerInstance(LocaleManager.get().getCurrentLocale()).format(filtered.size()))
+                + "\n\n" + filtered.stream().map(Product::toString).collect(Collectors.joining("\n"));
     }
 
-    // ── Общий метод отправки простой команды ──
-    private void sendSimple(String cmd, String arg) {
-        exeCommand(() -> NetworkClient.get().send(cmd, arg, null));
+    private void onCountUnit() {
+        String[] options = Arrays.stream(UnitOfMeasure.values()).map(Enum::name).toArray(String[]::new);
+        String chosen = (String) JOptionPane.showInputDialog(
+                this,
+                LocaleManager.s("dlg.unit_prompt"),
+                LocaleManager.s("button.count_unit"),
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+        if (chosen == null) {
+            return;
+        }
+        exeCommand(
+                () -> NetworkClient.get().send("count_by_unit_of_measure", chosen, null),
+                response -> formatCountResponse(chosen, response)
+        );
     }
 
-    /** Запускает сетевую команду в фоне, показывает результат, обновляет коллекцию */
-    private void exeCommand(java.util.concurrent.Callable<Response> task) {
-        SwingWorker<Response, Void> w = new SwingWorker<>() {
-            @Override protected Response doInBackground() throws Exception {
+    private String formatCountResponse(String unit, Response response) {
+        if (response.getData() instanceof Long count) {
+            return LocaleManager.s("msg.count_unit_result")
+                    .replace("{unit}", unit)
+                    .replace("{count}", NumberFormat.getIntegerInstance(LocaleManager.get().getCurrentLocale()).format(count));
+        }
+        return response.getMessage();
+    }
+
+    @SuppressWarnings("unchecked")
+    private void onPrintDescending() {
+        exeCommand(
+                () -> NetworkClient.get().send("print_field_descending_unit_of_measure", "", null),
+                response -> {
+                    if (response.getData() instanceof List<?> list) {
+                        return LocaleManager.s("msg.print_desc_result") + "\n" +
+                                ((List<String>) list).stream().collect(Collectors.joining("\n"));
+                    }
+                    return response.getMessage();
+                }
+        );
+    }
+
+    private void sendSimple(String cmd) {
+        exeCommand(() -> NetworkClient.get().send(cmd, "", null), Response::getMessage);
+    }
+
+    private void exeCommand(java.util.concurrent.Callable<Response> task,
+                            java.util.function.Function<Response, String> successFormatter) {
+        SwingWorker<Response, Void> worker = new SwingWorker<>() {
+            @Override
+            protected Response doInBackground() throws Exception {
                 return task.call();
             }
-            @Override protected void done() {
+
+            @Override
+            protected void done() {
                 try {
-                    Response resp = get();
-                    if (resp.isSuccess()) showInfo(resp.getMessage());
-                    else showError(resp.getMessage());
+                    Response response = get();
+                    if (response.isSuccess()) {
+                        showInfo(successFormatter.apply(response));
+                    } else {
+                        showError(response.getMessage());
+                    }
                     refreshCollection();
                 } catch (Exception ex) {
                     showError(LocaleManager.s("msg.server_down"));
                 }
             }
         };
-        w.execute();
+        worker.execute();
+    }
+
+    private String buildHelpText() {
+        String[] keys = {
+                "help.line.help", "help.line.info", "help.line.show", "help.line.add",
+                "help.line.update", "help.line.remove_by_id", "help.line.clear", "help.line.remove_at",
+                "help.line.remove_last", "help.line.reorder", "help.line.count_unit",
+                "help.line.filter_owner", "help.line.print_desc"
+        };
+        return Arrays.stream(keys).map(LocaleManager::s).collect(Collectors.joining("\n"));
+    }
+
+    private void onVisualProductClick(Product product) {
+        boolean isOwner = Objects.equals(product.getCreatorUsername(), NetworkClient.get().getCurrentUser());
+        String[] options = isOwner
+                ? new String[]{LocaleManager.s("vis.action.info"), LocaleManager.s("vis.action.edit"),
+                LocaleManager.s("vis.action.delete"), LocaleManager.s("dlg.cancel")}
+                : new String[]{LocaleManager.s("vis.action.info"), LocaleManager.s("dlg.cancel")};
+        int choice = JOptionPane.showOptionDialog(
+                this,
+                LocaleManager.s("vis.action.prompt"),
+                LocaleManager.s("vis.info_title"),
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+        if (choice == 0) {
+            VisualizationPanel.showProductInfo(this, product);
+        } else if (isOwner && choice == 1) {
+            selectProduct(product);
+            onUpdate();
+        } else if (isOwner && choice == 2) {
+            selectProduct(product);
+            onDeleteProduct(product);
+        }
+    }
+
+    private void selectProduct(Product product) {
+        int row = displayedProducts.indexOf(product);
+        if (row >= 0) {
+            table.getSelectionModel().setSelectionInterval(row, row);
+            tabs.setSelectedIndex(0);
+        }
     }
 
     private void showInfo(String msg) {

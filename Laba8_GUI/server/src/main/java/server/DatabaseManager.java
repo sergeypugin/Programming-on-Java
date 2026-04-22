@@ -10,15 +10,26 @@ import java.util.LinkedList;
 
 public class DatabaseManager {
     private static final Logger logger = LogManager.getLogger(DatabaseManager.class);
-//    private static final String DB_URL = "jdbc:postgresql://pg/studs";
-    private static final String DB_URL = "jdbc:postgresql://localhost:5432/studs";//TODO to delete
+    private static final String DEFAULT_DB_URL = "jdbc:postgresql://pg/studs";
     private final Connection connection;
 
     public DatabaseManager(String user, String password) throws SQLException {
-        connection = DriverManager.getConnection(DB_URL, user, password);
+        String dbUrl = getDatabaseUrl();
+        connection = DriverManager.getConnection(dbUrl, user, password);
         connection.setAutoCommit(true);
         initializeTables();
-        logger.info("Подключение к базе данных ({}) установлено", DB_URL);
+        logger.info("Подключение к базе данных ({}) установлено", dbUrl);
+    }
+
+    static String getDatabaseUrl() {
+        return getDatabaseUrl(System.getenv("DB_URL"));
+    }
+
+    static String getDatabaseUrl(String envUrl) {
+        if (envUrl == null || envUrl.isBlank()) {
+            return DEFAULT_DB_URL;
+        }
+        return envUrl.trim();
     }
 
     private void initializeTables() throws SQLException {

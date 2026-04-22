@@ -1,12 +1,14 @@
 package common.forCommunicate;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
  * Класс-ответ сервера клиенту
 */
 public class Response implements Serializable {
-    private static final long serialVersionUID = 1L;
+    @Serial
+    private static final long serialVersionUID = 2L;
 
     private final String message;
     private final boolean success;
@@ -29,7 +31,7 @@ public class Response implements Serializable {
         this.message = message;
         this.success = success;
         this.data = null;
-    }//TODO лучше убрать, а то какие-то команды прошляплю
+    }
 
     public String getMessage() { return message; }
     public boolean isSuccess() { return success; }

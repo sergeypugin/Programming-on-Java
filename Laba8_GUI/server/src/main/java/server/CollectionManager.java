@@ -13,9 +13,9 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Менеджер коллекции.
- * Все публичные методы синхронизированы для безопасной многопоточной работы.
- * Коллекция в памяти обновляется исключительно после успешной операции в БД.
+ * Менеджер коллекции.<p>
+ * Все публичные методы синхронизированы для безопасной многопоточной работы.<p>
+ * Коллекция в памяти обновляется исключительно после успешной операции в БД.<p>
  * Команды чтения работают с коллекцией в памяти.
  */
 public class CollectionManager {
@@ -30,25 +30,30 @@ public class CollectionManager {
 
     public synchronized void loadFromDatabase() throws SQLException {
         collection.clear();
-        try {
-            long count = db.countProducts();
-            if (count > Integer.MAX_VALUE) {
-                throw new IllegalStateException("Невозможно загрузить коллекцию в память: слишком много элементов в базе данных (" + count + "). Максимум: " + Integer.MAX_VALUE);
-            }
-            collection.addAll(db.loadAllProducts());
-            Collections.sort(collection);
-        } catch (SQLException e) {
-            throw e;
+        long count = db.countProducts();
+        if (count > Integer.MAX_VALUE) {
+            throw new IllegalStateException("Невозможно загрузить коллекцию в память: " +
+                    "слишком много элементов в базе данных (" + count + "). Максимум: " + Integer.MAX_VALUE);
         }
+        collection.addAll(db.loadAllProducts());
+        Collections.sort(collection);
     }
 
     // Всё для чтения
-    public synchronized LinkedList<Product> getCollection() {
+    public synchronized List<Product> getCollectionSnapshot() {
         return collection;
     }
 
     public synchronized Date getCreationDate() {
-        return creationDate;
+        return new Date(creationDate.getTime());
+    }
+
+    public synchronized long size() {
+        return collection.size();
+    }
+
+    public synchronized boolean isEmpty() {
+        return collection.isEmpty();
     }
 
     public synchronized long countByUnitOfMeasure(UnitOfMeasure unit) {

@@ -3,7 +3,7 @@ package client.locale;
 import java.util.ListResourceBundle;
 
 /**
- * Базовый (fallback) набор строк — совпадает с русским.
+ * Базовый набор строк - совпадает с русским.
  */
 public class Messages extends ListResourceBundle {
     @Override
