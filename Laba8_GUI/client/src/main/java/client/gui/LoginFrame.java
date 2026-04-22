@@ -227,26 +227,17 @@ public class LoginFrame extends JFrame {
         String user = userField.getText().trim();
         String pass = passField.getText().trim();
 
-        if (user.isEmpty() || pass.isEmpty()) {
-            setStatusByKey("msg.fill_fields", Color.RED);
-            return;
-        }
-        if (user.length() < MIN_USERNAME_LENGTH) {
-            setStatusByKey("msg.login_short", Color.RED);
-            return;
-        }
-        if (pass.length() < MIN_PASSWORD_LENGTH) {
-            setStatusByKey("msg.pass_short", Color.RED);
-            return;
-        }
+        if (!isValidInput(user,pass)) return;
+
         loginButton.setEnabled(false);
         registerButton.setEnabled(false);
         setStatusByKey("msg.server_check", Color.GRAY);
 
         SwingWorker<Boolean, Void> worker = new SwingWorker<>() {
+            final private String hashedPass = hashPassword(pass);
             @Override
             protected Boolean doInBackground() {
-                var resp = NetworkClient.get().sendAuth("login", user, pass);
+                var resp = NetworkClient.get().sendAuth("login", user, hashedPass);
                 return resp.isSuccess();
             }
 
@@ -255,7 +246,7 @@ public class LoginFrame extends JFrame {
                 try {
                     if (get()) {
                         NetworkClient.get().setCurrentUser(user);
-                        NetworkClient.get().setUserPassword(pass);
+                        NetworkClient.get().setUserPassword(hashedPass);
                         openMain();
                     } else {
                         setStatusByKey("msg.auth_fail", Color.RED);
@@ -276,18 +267,7 @@ public class LoginFrame extends JFrame {
         String user = userField.getText().trim();
         String pass = passField.getText().trim();
 
-        if (user.isEmpty() || pass.isEmpty()) {
-            setStatusByKey("msg.fill_fields", Color.RED);
-            return;
-        }
-        if (user.length() < MIN_USERNAME_LENGTH) {
-            setStatusByKey("msg.login_short", Color.RED);
-            return;
-        }
-        if (pass.length() < MIN_PASSWORD_LENGTH) {
-            setStatusByKey("msg.pass_short", Color.RED);
-            return;
-        }
+        if (!isValidInput(user,pass)) return;
 
         loginButton.setEnabled(false);
         registerButton.setEnabled(false);
@@ -295,10 +275,9 @@ public class LoginFrame extends JFrame {
 
         SwingWorker<String, Void> worker = new SwingWorker<>() {
             private boolean ok;
-
+            final private String hashedPass = hashPassword(pass);
             @Override
             protected String doInBackground() {
-                String hashedPass = hashPassword(pass);
                 var resp = NetworkClient.get().sendAuth("register", user, hashedPass);
                 ok = resp.isSuccess();
                 return resp.getMessage();
@@ -310,7 +289,7 @@ public class LoginFrame extends JFrame {
                     String msg = get();
                     if (ok) {
                         NetworkClient.get().setCurrentUser(user);
-                        NetworkClient.get().setUserPassword(pass);
+                        NetworkClient.get().setUserPassword(hashedPass);
                         setStatusByKey("msg.register_ok", Color.GREEN);
                         openMain();
                     } else {
@@ -328,6 +307,22 @@ public class LoginFrame extends JFrame {
             }
         };
         worker.execute();
+    }
+
+    private boolean isValidInput(String user, String pass) {
+        if (user.isEmpty() || pass.isEmpty()) {
+            setStatusByKey("msg.fill_fields", Color.RED);
+            return false;
+        }
+        if (user.length() < MIN_USERNAME_LENGTH) {
+            setStatusByKey("msg.login_short", Color.RED);
+            return false;
+        }
+        if (pass.length() < MIN_PASSWORD_LENGTH) {
+            setStatusByKey("msg.pass_short", Color.RED);
+            return false;
+        }
+        return true;
     }
 
     private void openMain() {

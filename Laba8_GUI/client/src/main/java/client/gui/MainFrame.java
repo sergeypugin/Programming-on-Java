@@ -9,6 +9,8 @@ import common.forCommunicate.Response;
 import common.forCommunicate.ShowData;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +25,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
+import java.util.concurrent.Callable;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -148,10 +152,10 @@ public class MainFrame extends JFrame {
             sortColCombo.addItem("");
         });
 
-        filterField.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-            public void insertUpdate(javax.swing.event.DocumentEvent e) { applyTableView(); }
-            public void removeUpdate(javax.swing.event.DocumentEvent e) { applyTableView(); }
-            public void changedUpdate(javax.swing.event.DocumentEvent e) { applyTableView(); }
+        filterField.getDocument().addDocumentListener(new DocumentListener() {
+            public void insertUpdate(DocumentEvent e) { applyTableView(); }
+            public void removeUpdate(DocumentEvent e) { applyTableView(); }
+            public void changedUpdate(DocumentEvent e) { applyTableView(); }
         });
         filterColCombo.addActionListener(e -> applyTableView());
         sortColCombo.addActionListener(e -> {
@@ -363,7 +367,7 @@ public class MainFrame extends JFrame {
         if (filterField == null || filterColCombo == null || sortColCombo == null) {
             return;
         }
-        String text = filterField.getText().trim().toLowerCase(Locale.ROOT);
+        String text = filterField.getText().trim().toLowerCase();
         int filterColumn = Math.max(0, filterColCombo.getSelectedIndex());
         sortColumnIndex = Math.max(0, sortColCombo.getSelectedIndex());
         sortDescending = sortDescBox.isSelected();
@@ -371,34 +375,18 @@ public class MainFrame extends JFrame {
         Stream<Product> stream = currentProducts.stream();
         if (!text.isEmpty()) {
             stream = stream.filter(product -> valueForColumn(product, filterColumn)
-                    .toLowerCase(Locale.ROOT)
-                    .contains(text));
+                    .toLowerCase().contains(text));
         }
 
         Comparator<Product> comparator = Comparator.comparing(
-                product -> sortComparableValue(product, sortColumnIndex),
-                MainFrame::compareValues
+                product -> (Comparable) sortComparableValue(product, sortColumnIndex)
         );
         if (sortDescending) {
             comparator = comparator.reversed();
         }
 
         displayedProducts = stream.sorted(comparator).collect(Collectors.toList());
-        populateTable(displayedProducts);
-    }
-
-    @SuppressWarnings({"rawtypes", "unchecked"})
-    private static int compareValues(Comparable left, Comparable right) {
-        if (left == right) {
-            return 0;
-        }
-        if (left == null) {
-            return -1;
-        }
-        if (right == null) {
-            return 1;
-        }
-        return left.compareTo(right);
+        updateTableUI(displayedProducts);
     }
 
     private Comparable<?> sortComparableValue(Product product, int column) {
@@ -431,7 +419,7 @@ public class MainFrame extends JFrame {
         };
     }
 
-    private void populateTable(List<Product> products) {
+    private void updateTableUI(List<Product> products) {
         tableModel.setRowCount(0);
         Locale locale = LocaleManager.get().getCurrentLocale();
         DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, locale);
@@ -523,7 +511,7 @@ public class MainFrame extends JFrame {
 
     private void onDeleteProduct(Product product) {
         int confirm = JOptionPane.showConfirmDialog(this,
-                LocaleManager.s("msg.confirm_del"), LocaleManager.s("msg.error"),
+                LocaleManager.s("msg.confirm_del"), LocaleManager.s("button.delete"),
                 JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;
@@ -533,7 +521,7 @@ public class MainFrame extends JFrame {
 
     private void onClear() {
         int confirm = JOptionPane.showConfirmDialog(this,
-                LocaleManager.s("msg.confirm_clear"), LocaleManager.s("msg.error"),
+                LocaleManager.s("msg.confirm_clear"), LocaleManager.s("button.clear"),
                 JOptionPane.YES_NO_OPTION);
         if (confirm != JOptionPane.YES_OPTION) {
             return;
@@ -640,8 +628,7 @@ public class MainFrame extends JFrame {
         exeCommand(() -> NetworkClient.get().send(cmd, "", null), Response::getMessage);
     }
 
-    private void exeCommand(java.util.concurrent.Callable<Response> task,
-                            java.util.function.Function<Response, String> successFormatter) {
+    private void exeCommand(Callable<Response> task, Function<Response, String> successFormatter) {
         SwingWorker<Response, Void> worker = new SwingWorker<>() {
             @Override
             protected Response doInBackground() throws Exception {

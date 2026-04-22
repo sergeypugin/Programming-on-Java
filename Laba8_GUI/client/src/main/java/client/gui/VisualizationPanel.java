@@ -16,43 +16,41 @@ import java.util.function.Consumer;
 
 /**
  * Панель визуализации коллекции.
- * Каждый продукт - цветной кружок, радиус - цена.
- * Разные владельцы (createdBy) - разные цвета.
+ * Каждый продукт - цветной круг, радиус - цена.
+ * Разные владельцы -> разные цвета.
  * Анимация: при появлении объект «вырастает» из центра.
- * Клик на объект → всплывающая информация.
+ * Клик на объект -> всплывающая информация.
  */
 public class VisualizationPanel extends JPanel {
-
-    // Состояние анимации для каждого продукта: id → прогресс [0..1]
     private final Map<Long, Float> animProgress = new HashMap<>();
     private final Map<String, Color> userColors = new HashMap<>();
     private static final Color[] PALETTE = {
-            new Color(70, 130, 180),  // steel blue
-            new Color(220, 80,  80),  // red
-            new Color(80,  180, 80),  // green
-            new Color(230, 160, 40),  // orange
-            new Color(150, 80,  200), // purple
-            new Color(40,  190, 190), // teal
-            new Color(220, 100, 160), // pink
+            new Color(70, 130, 180),
+            new Color(220, 80,  80),
+            new Color(80,  180, 80),
+            new Color(230, 160, 40),
+            new Color(150, 80,  200),
+            new Color(40,  190, 190),
+            new Color(220, 100, 160),
     };
 
     private List<Product> products = Collections.emptyList();
-    private Consumer<Product> onProductClick; // callback для отображения инфо
+    private Consumer<Product> onProductClick;
 
-    // Маппинг id → целевой радиус (чтобы не пересчитывать)
+
     private final Map<Long, Integer> radii = new HashMap<>();
 
     public VisualizationPanel() {
-        setBackground(new Color(245, 248, 252));
-        setPreferredSize(new Dimension(600, 500));
+        setBackground(new Color(245, 245, 245));
+        setPreferredSize(new Dimension(600, 600));
         addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 handleClick(e.getX(), e.getY());
             }
         });
-        // Анимационный таймер ~60 fps
-        Timer animTimer = new Timer(16, e -> {
+        // Анимационный таймер
+        Timer animTimer = new Timer(200, e -> {
             boolean anyUpdated = false;
             for (long id : new HashSet<>(animProgress.keySet())) {
                 float p = animProgress.get(id);
@@ -72,7 +70,6 @@ public class VisualizationPanel extends JPanel {
 
     /** Обновить список продуктов (вызывать из EDT). */
     public void setProducts(List<Product> newProducts) {
-        // Запустить анимацию для новых объектов
         Set<Long> newIds = new HashSet<>();
         for (Product p : newProducts) {
             newIds.add(p.getId());
@@ -111,29 +108,24 @@ public class VisualizationPanel extends JPanel {
     }
 
     private void drawProduct(Graphics2D g2, Product p, int W, int H) {
-        // Координаты: масштабируем в пиксели
         int cx = W / 2 + (int)(p.getCoordinates().getX() * 2);
         int cy = H / 2 - (int)(p.getCoordinates().getY() * 2);
-        // Ограничиваем экраном
         cx = Math.max(30, Math.min(W - 30, cx));
         cy = Math.max(30, Math.min(H - 30, cy));
 
-        int targetR = radii.getOrDefault(p.getId(), 20);
+        int targetR = radii.getOrDefault(p.getId()*25, 100);
         float progress = animProgress.getOrDefault(p.getId(), 1f);
-        // Easing: smooth step
-        progress = progress * progress * (3 - 2 * progress);
+        progress = progress * progress;
         int r = Math.max(4, (int)(targetR * progress));
 
         Color base = getColorForUser(p.getCreatorUsername());
-        // Заливка с прозрачностью
         g2.setColor(new Color(base.getRed(), base.getGreen(), base.getBlue(), 180));
         g2.fill(new Ellipse2D.Float(cx - r, cy - r, r * 2, r * 2));
-        // Контур
+
         g2.setColor(base.darker());
         g2.setStroke(new BasicStroke(2));
         g2.draw(new Ellipse2D.Float(cx - r, cy - r, r * 2, r * 2));
 
-        // Название, если радиус достаточно большой
         if (r > 18) {
             g2.setColor(Color.WHITE);
             g2.setFont(g2.getFont().deriveFont(Font.BOLD, 11f));
@@ -141,7 +133,6 @@ public class VisualizationPanel extends JPanel {
             String label = p.getName().length() > 8 ? p.getName().substring(0, 8) : p.getName();
             g2.drawString(label, cx - fm.stringWidth(label) / 2, cy + fm.getAscent() / 2 - 1);
         } else if (r > 8) {
-            // Хотя бы id
             g2.setColor(Color.WHITE);
             g2.setFont(g2.getFont().deriveFont(9f));
             String label = String.valueOf(p.getId());
@@ -152,7 +143,6 @@ public class VisualizationPanel extends JPanel {
 
     private void handleClick(int mx, int my) {
         int W = getWidth(), H = getHeight();
-        // Обходим в обратном порядке  верхний слой первым
         for (int i = products.size() - 1; i >= 0; i--) {
             Product p = products.get(i);
             int cx = W / 2 + (int)(p.getCoordinates().getX() * 2);
@@ -169,7 +159,6 @@ public class VisualizationPanel extends JPanel {
     }
 
     private int computeRadius(Product p) {
-        // Радиус от 10 до 50 в зависимости от цены (log-шкала)
         double logPrice = Math.log10(Math.max(1, p.getPrice()));
         return Math.max(10, Math.min(50, (int)(logPrice * 10)));
     }
@@ -185,7 +174,7 @@ public class VisualizationPanel extends JPanel {
     /** Показать popup с информацией об объекте (вызывается при клике) */
     public static void showProductInfo(Component parent, Product p) {
         DateFormat df = DateFormat.getDateTimeInstance(
-                DateFormat.MEDIUM, DateFormat.SHORT,
+                DateFormat.MEDIUM, DateFormat.MEDIUM,
                 LocaleManager.get().getCurrentLocale());
         NumberFormat nf = NumberFormat.getNumberInstance(LocaleManager.get().getCurrentLocale());
         String info = "<html><b>ID:</b> " + p.getId() +
