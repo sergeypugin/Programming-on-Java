@@ -7,6 +7,11 @@ import java.security.NoSuchAlgorithmException;
 public class HashUtils {
     private static final String HASH_ALGORITHM = "SHA-384";
     /**
+     * Хэширование используется на обеих сторонах протокола намеренно:
+     * клиент хэширует исходный пароль перед отправкой,
+     * сервер хэширует уже полученное значение перед хранением/сравнением.
+     */
+    /**
      * Хэширует пароль алгоритмом SHA-384 и возвращает hex-строку
      */
     static public String hashPassword(String password) {
