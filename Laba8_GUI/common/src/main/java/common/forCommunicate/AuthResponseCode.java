@@ -3,10 +3,6 @@ package common.forCommunicate;
 import java.io.Serial;
 import java.io.Serializable;
 
-/**
- * Машиночитаемые коды ответов для авторизации и регистрации.
- * Текст сообщения при этом может оставаться человекочитаемым и локально неиспользуемым.
- */
 public enum AuthResponseCode implements Serializable {
     LOGIN_OK,
     LOGIN_FAILED,
