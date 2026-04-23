@@ -2,6 +2,11 @@ package client.gui;
 
 import client.locale.LocaleManager;
 import client.network.NetworkClient;
+import client.theme.Theme;
+import client.theme.ThemeAware;
+import client.theme.ThemeManager;
+import client.theme.ThemeRole;
+import client.theme.ThemeStyler;
 import common.data.Product;
 import common.data.UnitOfMeasure;
 import common.forCommunicate.CollectionInfo;
@@ -16,6 +21,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.util.ArrayList;
@@ -34,7 +41,7 @@ import java.util.stream.Stream;
 /**
  * Главное окно приложения.
  */
-public class MainFrame extends JFrame {
+public class MainFrame extends JFrame implements ThemeAware {
     private static final String[] COL_KEYS = {
             "col.id", "col.name", "col.x", "col.y", "col.date",
             "col.price", "col.unit", "col.owner", "col.created_by"
@@ -50,11 +57,20 @@ public class MainFrame extends JFrame {
     private JTable table;
     private JTabbedPane tabs;
     private VisualizationPanel visPanel;
+    private JPanel rootPanel;
+    private JPanel headerPanel;
+    private JPanel rightHeaderPanel;
+    private JPanel tableTabPanel;
+    private JPanel tableControlsPanel;
+    private JPanel commandPanel;
+    private JPanel statusPanel;
 
     private JLabel curUserLabel;
     private JLabel langLabel;
+    private JLabel themeLabel;
     private JLabel syncStatusLabel;
     private JComboBox<String> langCombo;
+    private JComboBox<String> themeCombo;
 
     private JTextField filterField;
     private JComboBox<String> filterColCombo;
@@ -62,9 +78,10 @@ public class MainFrame extends JFrame {
     private JLabel sortLabel;
     private JComboBox<String> sortColCombo;
     private JCheckBox sortDescBox;
+    private JScrollPane tableScrollPane;
+    private JScrollPane visualScrollPane;
 
     private final java.util.Map<String, JButton> buttons = new java.util.LinkedHashMap<>();
-
     private final Timer refreshTimer;
     private List<Product> currentProducts = Collections.emptyList();
     private List<Product> displayedProducts = Collections.emptyList();
@@ -77,41 +94,49 @@ public class MainFrame extends JFrame {
         setSize(1180, 760);
         setLocationRelativeTo(null);
         buildUI();
+        ThemeManager.get().registerListener(this);
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                ThemeManager.get().unregisterListener(MainFrame.this);
+            }
+        });
         applyLocale();
+        applyTheme();
         refreshCollection();
         refreshTimer = new Timer(5000, e -> refreshCollection());
         refreshTimer.start();
     }
 
     private void buildUI() {
-        setLayout(new BorderLayout(5, 5));
-        add(buildHeader(), BorderLayout.NORTH);
+        rootPanel = new JPanel(new BorderLayout(5, 5));
+        setContentPane(rootPanel);
+
+        rootPanel.add(buildHeader(), BorderLayout.NORTH);
 
         tabs = new JTabbedPane();
-        JPanel tableTab = buildTableTab();
-        tabs.addTab("", tableTab);
+        tableTabPanel = buildTableTab();
+        tabs.addTab("", tableTabPanel);
 
         visPanel = new VisualizationPanel();
         visPanel.setOnProductClick(this::onVisualProductClick);
-        JScrollPane visSP = new JScrollPane(visPanel);
-        tabs.addTab("", visSP);
-        add(tabs, BorderLayout.CENTER);
+        visualScrollPane = new JScrollPane(visPanel);
+        tabs.addTab("", visualScrollPane);
+        rootPanel.add(tabs, BorderLayout.CENTER);
 
-        add(buildCommandPanel(), BorderLayout.EAST);
-        add(buildStatusPanel(), BorderLayout.SOUTH);
+        rootPanel.add(buildCommandPanel(), BorderLayout.EAST);
+        rootPanel.add(buildStatusPanel(), BorderLayout.SOUTH);
     }
 
     private JPanel buildHeader() {
-        JPanel p = new JPanel(new BorderLayout(10, 0));
-        p.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createMatteBorder(0, 0, 1, 0, Color.LIGHT_GRAY),
-                BorderFactory.createEmptyBorder(6, 12, 6, 12)));
+        headerPanel = new JPanel(new BorderLayout(10, 0));
+        headerPanel.setBorder(BorderFactory.createEmptyBorder(6, 12, 6, 12));
 
         curUserLabel = new JLabel();
         curUserLabel.setFont(curUserLabel.getFont().deriveFont(Font.BOLD));
-        p.add(curUserLabel, BorderLayout.WEST);
+        headerPanel.add(curUserLabel, BorderLayout.WEST);
 
-        JPanel right = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
+        rightHeaderPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 0));
         langLabel = new JLabel();
         langCombo = new JComboBox<>(LocaleManager.LOCALE_NAMES);
         for (int i = 0; i < LocaleManager.AVAILABLE_LOCALES.length; i++) {
@@ -123,23 +148,36 @@ public class MainFrame extends JFrame {
         langCombo.addActionListener(e -> {
             LocaleManager.get().setLocale(LocaleManager.AVAILABLE_LOCALES[langCombo.getSelectedIndex()]);
             applyLocale();
+            applyTheme();
         });
 
-        JButton logoutbutton = new JButton();
-        logoutbutton.addActionListener(e -> logout());
-        right.add(langLabel);
-        right.add(langCombo);
-        right.add(logoutbutton);
-        buttons.put("logout", logoutbutton);
-        p.add(right, BorderLayout.EAST);
-        return p;
+        themeLabel = new JLabel();
+        themeCombo = new JComboBox<>();
+        themeCombo.addActionListener(e -> {
+            int idx = themeCombo.getSelectedIndex();
+            if (idx >= 0 && idx < ThemeManager.get().getAvailableThemes().size()) {
+                ThemeManager.get().setTheme(ThemeManager.get().getAvailableThemes().get(idx));
+            }
+        });
+
+        JButton logoutButton = new JButton();
+        logoutButton.addActionListener(e -> logout());
+        buttons.put("logout", logoutButton);
+
+        rightHeaderPanel.add(langLabel);
+        rightHeaderPanel.add(langCombo);
+        rightHeaderPanel.add(themeLabel);
+        rightHeaderPanel.add(themeCombo);
+        rightHeaderPanel.add(logoutButton);
+        headerPanel.add(rightHeaderPanel, BorderLayout.EAST);
+        return headerPanel;
     }
 
     private JPanel buildTableTab() {
         JPanel panel = new JPanel(new BorderLayout(5, 5));
         panel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
 
-        JPanel controls = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
+        tableControlsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 6, 0));
         filterLabel = new JLabel();
         filterField = new JTextField(16);
         filterColCombo = new JComboBox<>();
@@ -167,13 +205,13 @@ public class MainFrame extends JFrame {
             applyTableView();
         });
 
-        controls.add(filterLabel);
-        controls.add(filterField);
-        controls.add(filterColCombo);
-        controls.add(sortLabel);
-        controls.add(sortColCombo);
-        controls.add(sortDescBox);
-        panel.add(controls, BorderLayout.NORTH);
+        tableControlsPanel.add(filterLabel);
+        tableControlsPanel.add(filterField);
+        tableControlsPanel.add(filterColCombo);
+        tableControlsPanel.add(sortLabel);
+        tableControlsPanel.add(sortColCombo);
+        tableControlsPanel.add(sortDescBox);
+        panel.add(tableControlsPanel, BorderLayout.NORTH);
 
         rebuildTableColumns();
         table = new JTable(tableModel);
@@ -205,17 +243,15 @@ public class MainFrame extends JFrame {
                 }
             }
         });
-        panel.add(new JScrollPane(table), BorderLayout.CENTER);
+        tableScrollPane = new JScrollPane(table);
+        panel.add(tableScrollPane, BorderLayout.CENTER);
         return panel;
     }
 
     private JPanel buildCommandPanel() {
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createMatteBorder(0, 1, 0, 0, Color.LIGHT_GRAY),
-                BorderFactory.createEmptyBorder(10, 10, 10, 10)));
-        panel.setPreferredSize(new Dimension(195, 0));
+        commandPanel = new JPanel();
+        commandPanel.setLayout(new BoxLayout(commandPanel, BoxLayout.Y_AXIS));
+        commandPanel.setPreferredSize(new Dimension(205, 0));
 
         String[][] cmds = {
                 {"button.refresh", "refresh"},
@@ -239,26 +275,24 @@ public class MainFrame extends JFrame {
             button.setActionCommand(cmd[1]);
             button.addActionListener(this::handleCommand);
             buttons.put(cmd[1], button);
-            panel.add(button);
-            panel.add(Box.createRigidArea(new Dimension(0, 5)));
+            commandPanel.add(button);
+            commandPanel.add(Box.createRigidArea(new Dimension(0, 5)));
         }
-        return panel;
+        return commandPanel;
     }
 
     private JPanel buildStatusPanel() {
-        JPanel panel = new JPanel(new BorderLayout());
-        panel.setBorder(BorderFactory.createCompoundBorder(
-                BorderFactory.createMatteBorder(1, 0, 0, 0, Color.LIGHT_GRAY),
-                BorderFactory.createEmptyBorder(4, 12, 4, 12)));
+        statusPanel = new JPanel(new BorderLayout());
         syncStatusLabel = new JLabel();
-        panel.add(syncStatusLabel, BorderLayout.WEST);
-        return panel;
+        statusPanel.add(syncStatusLabel, BorderLayout.WEST);
+        return statusPanel;
     }
 
     private void applyLocale() {
         setTitle(LocaleManager.s("app.title"));
         curUserLabel.setText(LocaleManager.s("label.cur_user") + NetworkClient.get().getCurrentUser());
         langLabel.setText(LocaleManager.s("label.language"));
+        themeLabel.setText(LocaleManager.s("label.theme"));
 
         setButtonText("refresh", "button.refresh");
         setButtonText("help", "button.help");
@@ -284,10 +318,27 @@ public class MainFrame extends JFrame {
             tabs.setTitleAt(1, LocaleManager.s("tab.visual"));
         }
 
+        rebuildThemeCombo();
         rebuildTableColumns();
         rebuildColumnCombos();
         applyTableView();
         visPanel.repaint();
+    }
+
+    private void rebuildThemeCombo() {
+        int previous = themeCombo.getSelectedIndex();
+        themeCombo.removeAllItems();
+        List<Theme> themes = ThemeManager.get().getAvailableThemes();
+        for (Theme theme : themes) {
+            themeCombo.addItem(LocaleManager.s(theme.displayNameKey()));
+        }
+        int selectedIndex = IntStream.range(0, themes.size())
+                .filter(i -> themes.get(i).id().equals(ThemeManager.get().getTheme().id()))
+                .findFirst()
+                .orElse(Math.max(previous, 0));
+        if (selectedIndex >= 0 && selectedIndex < themes.size()) {
+            themeCombo.setSelectedIndex(selectedIndex);
+        }
     }
 
     private void setButtonText(String id, String key) {
@@ -298,9 +349,7 @@ public class MainFrame extends JFrame {
     }
 
     private void rebuildTableColumns() {
-        String[] headers = Arrays.stream(COL_KEYS)
-                .map(LocaleManager::s)
-                .toArray(String[]::new);
+        String[] headers = Arrays.stream(COL_KEYS).map(LocaleManager::s).toArray(String[]::new);
         tableModel.setColumnIdentifiers(headers);
     }
 
@@ -350,7 +399,7 @@ public class MainFrame extends JFrame {
     private void onRefreshFailed() {
         syncStatusLabel.setText(LocaleManager.s("status.sync_failed"));
         if (showRefreshErrors) {
-            showError(LocaleManager.s("msg.server_down"));
+            showErrorByKey("msg.server_down");
             showRefreshErrors = false;
         }
     }
@@ -367,20 +416,18 @@ public class MainFrame extends JFrame {
         if (filterField == null || filterColCombo == null || sortColCombo == null) {
             return;
         }
-        String text = filterField.getText().trim().toLowerCase();
+        String text = filterField.getText().trim().toLowerCase(Locale.ROOT);
         int filterColumn = Math.max(0, filterColCombo.getSelectedIndex());
         sortColumnIndex = Math.max(0, sortColCombo.getSelectedIndex());
         sortDescending = sortDescBox.isSelected();
 
         Stream<Product> stream = currentProducts.stream();
         if (!text.isEmpty()) {
-            stream = stream.filter(product -> valueForColumn(product, filterColumn)
-                    .toLowerCase().contains(text));
+            stream = stream.filter(product -> valueForColumn(product, filterColumn).toLowerCase(Locale.ROOT).contains(text));
         }
 
-        Comparator<Product> comparator = Comparator.comparing(
-                product -> (Comparable) sortComparableValue(product, sortColumnIndex)
-        );
+        Comparator<Product> comparator = Comparator.comparing(product -> (Comparable<?>) sortComparableValue(product, sortColumnIndex),
+                (left, right) -> ((Comparable) left).compareTo(right));
         if (sortDescending) {
             comparator = comparator.reversed();
         }
@@ -484,11 +531,11 @@ public class MainFrame extends JFrame {
     private void onUpdate() {
         Product sel = getSelectedProduct();
         if (sel == null) {
-            showInfo(LocaleManager.s("msg.no_sel"));
+            showInfoByKey("msg.no_sel");
             return;
         }
         if (!Objects.equals(sel.getCreatorUsername(), NetworkClient.get().getCurrentUser())) {
-            showError(LocaleManager.s("msg.not_owner"));
+            showErrorByKey("msg.not_owner");
             return;
         }
         ProductDialog dlg = new ProductDialog(this, sel);
@@ -503,7 +550,7 @@ public class MainFrame extends JFrame {
     private void onDelete() {
         Product sel = getSelectedProduct();
         if (sel == null) {
-            showInfo(LocaleManager.s("msg.no_sel"));
+            showInfoByKey("msg.no_sel");
             return;
         }
         onDeleteProduct(sel);
@@ -535,9 +582,7 @@ public class MainFrame extends JFrame {
 
     private String formatInfoResponse(Response response) {
         if (response.getData() instanceof CollectionInfo info) {
-            DateFormat dateFormat = DateFormat.getDateTimeInstance(
-                    DateFormat.MEDIUM, DateFormat.SHORT, LocaleManager.get().getCurrentLocale()
-            );
+            DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.MEDIUM, DateFormat.SHORT, LocaleManager.get().getCurrentLocale());
             NumberFormat numberFormat = NumberFormat.getIntegerInstance(LocaleManager.get().getCurrentLocale());
             return LocaleManager.s("info.template")
                     .replace("{type}", info.getCollectionType())
@@ -561,17 +606,13 @@ public class MainFrame extends JFrame {
             return;
         }
         String ownerName = input.trim();
-        exeCommand(
-                () -> NetworkClient.get().send("filter_by_owner", ownerName, null),
-                response -> formatFilterOwnerResponse(ownerName, response)
-        );
+        exeCommand(() -> NetworkClient.get().send("filter_by_owner", ownerName, null),
+                response -> formatFilterOwnerResponse(ownerName, response));
     }
 
     @SuppressWarnings("unchecked")
     private String formatFilterOwnerResponse(String ownerName, Response response) {
-        List<Product> filtered = response.getData() instanceof List<?> list
-                ? (List<Product>) list
-                : Collections.emptyList();
+        List<Product> filtered = response.getData() instanceof List<?> list ? (List<Product>) list : Collections.emptyList();
         if (filtered.isEmpty()) {
             return LocaleManager.s("msg.owner_not_found").replace("{owner}", ownerName);
         }
@@ -595,10 +636,8 @@ public class MainFrame extends JFrame {
         if (chosen == null) {
             return;
         }
-        exeCommand(
-                () -> NetworkClient.get().send("count_by_unit_of_measure", chosen, null),
-                response -> formatCountResponse(chosen, response)
-        );
+        exeCommand(() -> NetworkClient.get().send("count_by_unit_of_measure", chosen, null),
+                response -> formatCountResponse(chosen, response));
     }
 
     private String formatCountResponse(String unit, Response response) {
@@ -612,16 +651,13 @@ public class MainFrame extends JFrame {
 
     @SuppressWarnings("unchecked")
     private void onPrintDescending() {
-        exeCommand(
-                () -> NetworkClient.get().send("print_field_descending_unit_of_measure", "", null),
+        exeCommand(() -> NetworkClient.get().send("print_field_descending_unit_of_measure", "", null),
                 response -> {
                     if (response.getData() instanceof List<?> list) {
-                        return LocaleManager.s("msg.print_desc_result") + "\n" +
-                                ((List<String>) list).stream().collect(Collectors.joining("\n"));
+                        return LocaleManager.s("msg.print_desc_result") + "\n" + ((List<String>) list).stream().collect(Collectors.joining("\n"));
                     }
                     return response.getMessage();
-                }
-        );
+                });
     }
 
     private void sendSimple(String cmd) {
@@ -646,7 +682,7 @@ public class MainFrame extends JFrame {
                     }
                     refreshCollection();
                 } catch (Exception ex) {
-                    showError(LocaleManager.s("msg.server_down"));
+                    showErrorByKey("msg.server_down");
                 }
             }
         };
@@ -698,6 +734,14 @@ public class MainFrame extends JFrame {
         }
     }
 
+    private void showInfoByKey(String key) {
+        showInfo(LocaleManager.s(key));
+    }
+
+    private void showErrorByKey(String key) {
+        showError(LocaleManager.s(key));
+    }
+
     private void showInfo(String msg) {
         JOptionPane.showMessageDialog(this, msg, LocaleManager.s("msg.success"), JOptionPane.INFORMATION_MESSAGE);
     }
@@ -712,5 +756,39 @@ public class MainFrame extends JFrame {
         NetworkClient.get().setUserPassword("");
         new LoginFrame().setVisible(true);
         dispose();
+    }
+
+    @Override
+    public void applyTheme() {
+        Theme theme = ThemeManager.get().getTheme();
+        ThemeStyler.stylePanel(rootPanel, theme, ThemeRole.BACKGROUND);
+        ThemeStyler.stylePanel(headerPanel, theme, ThemeRole.SURFACE);
+        rightHeaderPanel.setOpaque(false);
+        ThemeStyler.stylePanel(tableTabPanel, theme, ThemeRole.SURFACE);
+        ThemeStyler.stylePanel(tableControlsPanel, theme, ThemeRole.SURFACE);
+        ThemeStyler.stylePanel(commandPanel, theme, ThemeRole.SURFACE);
+        ThemeStyler.stylePanel(statusPanel, theme, ThemeRole.SURFACE);
+        ThemeStyler.styleLabel(curUserLabel, theme, ThemeRole.FOREGROUND);
+        ThemeStyler.styleLabel(langLabel, theme, ThemeRole.FOREGROUND);
+        ThemeStyler.styleLabel(themeLabel, theme, ThemeRole.FOREGROUND);
+        ThemeStyler.styleLabel(filterLabel, theme, ThemeRole.FOREGROUND);
+        ThemeStyler.styleLabel(sortLabel, theme, ThemeRole.FOREGROUND);
+        ThemeStyler.styleLabel(syncStatusLabel, theme, ThemeRole.MUTED_TEXT);
+        ThemeStyler.styleLabelsRecursively(tableControlsPanel, theme, ThemeRole.FOREGROUND);
+        ThemeStyler.styleComboBox(langCombo, theme);
+        ThemeStyler.styleComboBox(themeCombo, theme);
+        ThemeStyler.styleTextComponent(filterField, theme);
+        ThemeStyler.styleComboBox(filterColCombo, theme);
+        ThemeStyler.styleComboBox(sortColCombo, theme);
+        ThemeStyler.styleCheckBox(sortDescBox, theme);
+        ThemeStyler.styleScrollPane(tableScrollPane, theme);
+        ThemeStyler.styleScrollPane(visualScrollPane, theme);
+        ThemeStyler.styleTable(table, theme);
+        ThemeStyler.styleTabbedPane(tabs, theme);
+        visPanel.applyTheme();
+
+        buttons.forEach((id, button) -> ThemeStyler.styleButton(button, theme, false));
+        buttons.forEach((id, button) -> ThemeStyler.refreshButtonState(button, theme, false));
+        rootPanel.repaint();
     }
 }

@@ -482,3 +482,99 @@
 2026-04-22 17:46:56.937 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:52927 (user=sergey)
 2026-04-22 17:46:56.974 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
 2026-04-22 17:46:56.974 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-22 18:24:04.392 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-22 18:24:04.462 [main] ERROR server.ServerMain - Не удалось подключиться к БД с переменными окружениями (возможно их просто нет): Connection to localhost:9876 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+2026-04-22 18:24:04.463 [main] INFO  server.ServerMain - Введите данные для подключения к БД
+2026-04-22 18:24:04.463 [main] INFO  server.ServerMain - 
+2026-04-22 18:25:14.804 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-22 18:25:15.489 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-22 18:25:15.489 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:9876/studs) установлено
+2026-04-22 18:25:15.529 [main] INFO  server.DatabaseManager - Загружено 2 продуктов из базы данных
+2026-04-22 18:25:15.533 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-22 18:25:15.536 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-22 18:25:22.531 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:58027 (user=null)
+2026-04-22 18:25:22.535 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-22 18:25:22.536 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: I'm okay
+2026-04-22 18:25:33.235 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:49904 (user=sergey)
+2026-04-22 18:25:33.308 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-22 18:25:33.308 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-23 12:46:49.330 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-23 12:46:49.381 [main] ERROR server.ServerMain - Не удалось подключиться к БД с переменными окружениями (возможно их просто нет): Connection to localhost:9876 refused. Check that the hostname and port are correct and that the postmaster is accepting TCP/IP connections.
+2026-04-23 12:46:49.382 [main] INFO  server.ServerMain - Введите данные для подключения к БД
+2026-04-23 12:46:49.382 [main] INFO  server.ServerMain - 
+2026-04-23 12:47:52.063 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-23 12:47:52.824 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-23 12:47:52.825 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:9876/studs) установлено
+2026-04-23 12:47:52.884 [main] INFO  server.DatabaseManager - Загружено 5 продуктов из базы данных
+2026-04-23 12:47:52.894 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-23 12:47:52.896 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-23 12:47:58.088 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:51920 (user=null)
+2026-04-23 12:47:58.090 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-23 12:47:58.091 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: I'm okay
+2026-04-23 12:47:59.858 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:51921 (user=sergey)
+2026-04-23 12:47:59.883 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-23 12:47:59.884 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-23 12:48:01.842 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:50429 (user=sergey)
+2026-04-23 12:48:01.865 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-23 12:48:01.866 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-23 12:48:09.901 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:63591 (user=sergey)
+2026-04-23 12:48:09.921 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-23 12:48:09.922 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-23 12:48:10.933 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'register' от /127.0.0.1:63592 (user=sergey)
+2026-04-23 12:48:10.961 [ForkJoinPool-2-worker-1] WARN  server.DatabaseManager - Попытка регистрации существующего пользователя: sergey
+2026-04-23 12:48:10.962 [ForkJoinPool-2-worker-1] WARN  server.UserManager - Регистрация не удалась: пользователь с именем 'sergey' уже занят
+2026-04-23 12:48:10.962 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'register' (user=sergey)
+2026-04-23 12:48:10.962 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда 'register' (user=sergey) завершилась с ошибкой. Ответ: Ошибка регистрации: пользователь с логином 'sergey' уже существует.
+2026-04-23 12:48:12.981 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'register' от /127.0.0.1:63593 (user=sergey)
+2026-04-23 12:48:13.002 [ForkJoinPool-2-worker-1] WARN  server.DatabaseManager - Попытка регистрации существующего пользователя: sergey
+2026-04-23 12:48:13.003 [ForkJoinPool-2-worker-1] WARN  server.UserManager - Регистрация не удалась: пользователь с именем 'sergey' уже занят
+2026-04-23 12:48:13.004 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'register' (user=sergey)
+2026-04-23 12:48:13.004 [ForkJoinPool-2-worker-1] WARN  server.CommandManager - Команда 'register' (user=sergey) завершилась с ошибкой. Ответ: Ошибка регистрации: пользователь с логином 'sergey' уже существует.
+2026-04-23 12:48:36.340 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:60843 (user=pugin)
+2026-04-23 12:48:36.362 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=pugin)
+2026-04-23 12:48:36.362 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'login' (user=pugin) успешно выполнена. Ответ: Сколько лет сколько зим, pugin!
+2026-04-23 12:48:46.190 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:56547 (user=pugin)
+2026-04-23 12:48:46.210 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=pugin)
+2026-04-23 12:48:46.210 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'login' (user=pugin) успешно выполнена. Ответ: Сколько лет сколько зим, pugin!
+2026-04-23 12:56:13.054 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-23 12:56:13.719 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-23 12:56:13.719 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:9876/studs) установлено
+2026-04-23 12:56:13.757 [main] INFO  server.DatabaseManager - Загружено 5 продуктов из базы данных
+2026-04-23 12:56:13.760 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-23 12:56:13.763 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-23 12:56:25.514 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:64445 (user=null)
+2026-04-23 12:56:25.517 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-23 12:56:25.518 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: I'm okay
+2026-04-23 12:57:47.061 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:51049 (user=sergey)
+2026-04-23 12:57:47.094 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-23 12:57:47.094 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-23 13:03:45.214 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'filter_by_owner' от /127.0.0.1:54928 (user=sergey)
+2026-04-23 13:03:45.237 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Выполняется команда 'filter_by_owner' (user=sergey)
+2026-04-23 13:03:45.237 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Команда 'filter_by_owner' (user=sergey) успешно выполнена. Ответ: 
+2026-04-23 13:03:54.724 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'filter_by_owner' от /127.0.0.1:52150 (user=sergey)
+2026-04-23 13:03:54.757 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Выполняется команда 'filter_by_owner' (user=sergey)
+2026-04-23 13:03:54.757 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Команда 'filter_by_owner' (user=sergey) успешно выполнена. Ответ: Product {id=2, name='Яблоко, coordinates=(-100.0; -90.0), creationDate=Wed Apr 22 17:27:47 MSK 2026, price=150, unit=GRAMS, owner=Person {name='Владислав', height=2, weight=2.0}, creator='sergey'}
+2026-04-23 13:05:56.262 [ForkJoinPool-1-worker-2] INFO  server.ServerMain - Получен запрос 'info' от /127.0.0.1:61491 (user=sergey)
+2026-04-23 13:05:56.287 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Выполняется команда 'info' (user=sergey)
+2026-04-23 13:05:56.288 [ForkJoinPool-2-worker-2] INFO  server.CommandManager - Команда 'info' (user=sergey) успешно выполнена. Ответ: Информация о коллекции:
+Тип: java.util.LinkedList
+Дата инициализации: Thu Apr 23 12:56:13 MSK 2026
+Количество элементов: 5
+2026-04-23 16:56:40.429 [main] INFO  server.ServerMain - Порт сервера не передан, используем по умолчанию: 1524
+2026-04-23 16:56:41.325 [main] INFO  server.DatabaseManager - Таблицы базы данных инициализированы
+2026-04-23 16:56:41.325 [main] INFO  server.DatabaseManager - Подключение к базе данных (jdbc:postgresql://localhost:9876/studs) установлено
+2026-04-23 16:56:41.378 [main] INFO  server.DatabaseManager - Загружено 5 продуктов из базы данных
+2026-04-23 16:56:41.444 [main] INFO  server.CommandManager - Все команды инициализированы
+2026-04-23 16:56:41.448 [Thread-0] INFO  server.ServerMain - Доступные команды сервера: exit
+2026-04-23 16:58:21.169 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:52784 (user=null)
+2026-04-23 16:58:21.175 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-23 16:58:21.175 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: I'm okay
+2026-04-23 16:58:35.931 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:55372 (user=sergey)
+2026-04-23 16:58:35.957 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-23 16:58:35.957 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!
+2026-04-23 16:59:34.171 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'ping' от /127.0.0.1:51668 (user=null)
+2026-04-23 16:59:34.173 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'ping' (user=null)
+2026-04-23 16:59:34.173 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'ping' (user=null) успешно выполнена. Ответ: I'm okay
+2026-04-23 16:59:43.951 [ForkJoinPool-1-worker-1] INFO  server.ServerMain - Получен запрос 'login' от /127.0.0.1:57963 (user=sergey)
+2026-04-23 16:59:43.976 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Выполняется команда 'login' (user=sergey)
+2026-04-23 16:59:43.977 [ForkJoinPool-2-worker-1] INFO  server.CommandManager - Команда 'login' (user=sergey) успешно выполнена. Ответ: Сколько лет сколько зим, sergey!

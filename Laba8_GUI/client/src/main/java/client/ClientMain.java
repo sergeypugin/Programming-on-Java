@@ -3,6 +3,7 @@ package client;
 import client.gui.LoginFrame;
 import client.locale.LocaleManager;
 import client.network.NetworkClient;
+import client.theme.ThemeManager;
 
 import javax.swing.*;
 
@@ -27,6 +28,7 @@ public class ClientMain {
 
         NetworkClient.initialize(serverHost, serverPort);
         LocaleManager.get();
+        ThemeManager.get();
         SwingUtilities.invokeLater(() -> {
             try {
                 UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());

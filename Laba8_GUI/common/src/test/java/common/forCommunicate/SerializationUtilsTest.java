@@ -15,7 +15,7 @@ class SerializationUtilsTest {
     void requestAndResponseShouldRoundTrip() throws Exception {
         Product product = new Product("Test", new Coordinates(12.5, 4.0f), 100, UnitOfMeasure.GRAMS, null);
         Request request = new Request("add", "", product, "user", "pass");
-        Response response = new Response("ok", true, new ShowData(List.of(product)));
+        Response response = new Response("ok", true, AuthResponseCode.LOGIN_OK);
 
         Request requestCopy = (Request) SerializationUtils.deserialize(SerializationUtils.serialize(request));
         Response responseCopy = (Response) SerializationUtils.deserialize(SerializationUtils.serialize(response));
@@ -25,7 +25,6 @@ class SerializationUtilsTest {
         assertNotNull(requestCopy.getObjectArgument());
 
         assertTrue(responseCopy.isSuccess());
-        assertInstanceOf(ShowData.class, responseCopy.getData());
-        assertEquals(1, ((ShowData) responseCopy.getData()).getProducts().size());
+        assertEquals(AuthResponseCode.LOGIN_OK, responseCopy.getData());
     }
 }

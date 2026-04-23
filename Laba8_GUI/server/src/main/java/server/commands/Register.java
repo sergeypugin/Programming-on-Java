@@ -1,5 +1,6 @@
 package server.commands;
 
+import common.forCommunicate.AuthResponseCode;
 import common.forCommunicate.Request;
 import common.forCommunicate.Response;
 import server.UserManager;
@@ -21,11 +22,23 @@ public class Register implements Command {
         Boolean registrationResult = userManager.register(username, password);
 
         if (Boolean.TRUE.equals(registrationResult)) {
-            return new Response("Регистрация прошла успешно! Добро пожаловать, " + username + "!", true);
+            return new Response(
+                    "Регистрация прошла успешно! Добро пожаловать, " + username + "!",
+                    true,
+                    AuthResponseCode.REGISTER_OK
+            );
         } else if (Boolean.FALSE.equals(registrationResult)) {
-            return new Response("Ошибка регистрации: некорректное имя пользователя или пароль. ", false);
+            return new Response(
+                    "Ошибка регистрации: некорректное имя пользователя или пароль. ",
+                    false,
+                    AuthResponseCode.REGISTER_INVALID
+            );
         } else {
-            return new Response("Ошибка регистрации: пользователь с логином '" + username + "' уже существует.", false);
+            return new Response(
+                    "Ошибка регистрации: пользователь с логином '" + username + "' уже существует.",
+                    false,
+                    AuthResponseCode.REGISTER_USER_EXISTS
+            );
         }
     }
 }

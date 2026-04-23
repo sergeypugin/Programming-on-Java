@@ -6,7 +6,8 @@ import org.apache.logging.log4j.Logger;
 import static common.forCommunicate.HashUtils.hashPassword;
 
 /**
- * Менеджер пользователей для регистрации, аутентификации и хэширования паролей алгоритмом SHA-384
+ * Менеджер пользователей для регистрации и аутентификации.
+ * Клиент присылает уже захэшированное значение, после чего сервер намеренно хэширует его ещё раз.
  */
 public class UserManager {
     private static final Logger logger = LogManager.getLogger(UserManager.class);

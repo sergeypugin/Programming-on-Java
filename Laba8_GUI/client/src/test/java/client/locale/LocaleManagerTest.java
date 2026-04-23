@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.util.Locale;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class LocaleManagerTest {
@@ -29,5 +30,6 @@ class LocaleManagerTest {
         LocaleManager.get().setLocale(new Locale("hu", "HU"));
         assertTrue(LocaleManager.s("status.sync_failed").length() > 5);
         assertTrue(LocaleManager.s("vis.action.edit").length() > 3);
+        assertFalse(LocaleManager.s("msg.server_ok").contains("✓"));
     }
 }
